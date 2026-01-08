@@ -811,18 +811,25 @@ body {
     opacity: 1;
 }
 
-/* Final Content Container */
+/* Final Content Container - Safe Zone Layout */
 .final-content {
-    text-align: center;
-    color: #E8E3E8;
-    /* Soft warm off-white */
-    width: 100%;
-    max-width: 650px;
-    padding: 2rem;
+    /* Absolute centering with strict safe margins */
+    position: absolute;
+    /* Safe Zone: Central 76% vertical, 10% margins sides */
+    inset: 12vh 5% 12vh 5%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5vh;
+    justify-content: center;
+    /* Balanced vertical rhythm */
+    gap: 3vh;
+    /* Fluid vertical spacing */
+
+    text-align: center;
+    color: #E8E3E8;
+    z-index: 25;
+    /* Ensure above overlay breathing */
 }
 
 /* Base transition state for all children */
@@ -833,82 +840,88 @@ body {
 .final-contact,
 .final-footer {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(15px);
     transition: opacity 2.5s ease-out, transform 2.5s ease-out;
 }
 
-/* 1. Logo - Soft Glow */
+/* 1. Logo - Subtle Presence */
 .final-logo {
-    width: 140px;
+    width: 80px;
+    /* Reduced for elegance */
     height: auto;
-    margin-bottom: 3vh;
-    filter: drop-shadow(0 0 20px rgba(233, 213, 255, 0.15));
+    filter: drop-shadow(0 0 15px rgba(233, 213, 255, 0.2));
     transition-delay: 1.0s;
+    margin-bottom: 2vh;
 }
 
-/* 2. "De deur is open" - Calm, Large */
+/* 2. Primary Line - Elevated, Fashion Editorial */
 .final-line-1 {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 5vw, 3rem);
+    /* Responsive sizing safely within 9:16 */
+    font-size: clamp(1.8rem, 4vh, 2.6rem);
     font-weight: 300;
-    letter-spacing: 0.1em;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
     color: #FFF5E1;
     transition-delay: 3.0s;
 }
 
-/* 3. "Wat daarachter ontstaat..." - Softer */
+/* 3. Supporting Line - Soft & Italic */
 .final-line-2 {
     font-family: var(--font-heading);
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-size: clamp(1.1rem, 2.2vh, 1.4rem);
     font-style: italic;
-    letter-spacing: 0.05em;
-    margin-bottom: 3vh;
+    opacity: 0.85;
+    margin-bottom: 2vh;
     transition-delay: 6.0s;
-    /* Pause before this */
 }
 
-/* 4. Descriptive List - Sensual */
+/* 4. Description - Sensual Breathing Space */
 .final-line-3 {
     font-family: var(--font-body);
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-    line-height: 1.8;
+    font-size: clamp(0.85rem, 1.8vh, 1rem);
+    line-height: 2.0;
+    /* Airy */
     letter-spacing: 0.05em;
-    margin-bottom: 4vh;
+    opacity: 0.75;
+    /* Prevent extra wide lines */
+    max-width: 35ch;
+    margin-bottom: auto;
+    /* Push contact down slightly */
     transition-delay: 9.0s;
-    /* Another pause */
 }
 
-/* 5. Contact - Whispered */
+/* 5. Contact - Discreet & Accessible */
 .final-contact {
     font-family: var(--font-accent);
-    font-size: 0.95rem;
-    letter-spacing: 0.12em;
-    line-height: 1.6;
-    margin-bottom: 4vh;
+    font-size: clamp(0.75rem, 1.6vh, 0.9rem);
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+    opacity: 0.6;
     transition-delay: 12.0s;
 }
 
 .contact-name {
     font-weight: 500;
     color: #FFF;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .contact-detail {
     font-weight: 300;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
-/* 6. Footer - Very Subtle */
+/* 6. Footer - Barely There */
 .final-footer {
     font-family: var(--font-body);
-    font-size: 0.8rem;
-    line-height: 1.6;
-    letter-spacing: 0.05em;
+    font-size: 0.7rem;
+    opacity: 0.25;
+    margin-top: 1vh;
     transition-delay: 14.0s;
 }
 
-/* Reveal States (Target Opacities) */
+/* Reveal States */
 .act2.resolve-charcoal .final-logo {
     opacity: 1;
     transform: translateY(0);
@@ -938,7 +951,6 @@ body {
     opacity: 0.3;
     transform: translateY(0);
 }
-
 
 
 /* ACT 2 Layers */
