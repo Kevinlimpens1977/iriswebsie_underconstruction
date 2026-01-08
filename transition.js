@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Triggered after POV completes
                             setTimeout(() => {
                                 act2.classList.add('resolve-charcoal');
-                            }, 6500);
+                            }, 10000);
 
                         }, 1800);
                     };

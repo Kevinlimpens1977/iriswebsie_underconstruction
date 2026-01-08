@@ -715,8 +715,8 @@ body {
 
     /* GPU acceleration */
     will-change: opacity, filter, transform;
-    /* Phase 6: POV Entry (Slower: 6.5s for gentle pull) */
-    transition: transform 6.5s cubic-bezier(0.3, 0.0, 0.7, 1), filter 6.5s ease-in;
+    /* Phase 6: POV Entry (Much Slower: 10.0s for gentle glide) */
+    transition: transform 10.0s cubic-bezier(0.25, 0.0, 0.75, 1), filter 10.0s ease-in;
 }
 
 /* POV Entry State (Light fills the frame) */
@@ -725,22 +725,22 @@ body {
     transform: scale(9.0);
 }
 
-/* Act 2B: Warm Light Fill - Intensified */
+/* Act 2B: Warm Light Fill - Interior Tone Sync */
 .act2__fill-light {
     position: absolute;
     inset: 0;
     z-index: 10;
-    /* Intense, enveloping interior light (White-Gold center) */
-    background: radial-gradient(circle at center, #FFFFFF 0%, #FFF0D0 40%, #FFDFA0 100%);
+    /* Enveloping interior light (Warm Gold/Cognac tones) */
+    background: radial-gradient(circle at center, #FFF5E1 0%, #EDC967 40%, #935430 100%);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 6.5s ease-in;
+    transition: opacity 10.0s ease-in;
     /* Syncs with POV */
 }
 
 .act2.pov-entry .act2__fill-light {
     opacity: 1;
-    /* Envelope screen in light */
+    /* Envelope screen in interior light */
 }
 
 /* Act 2C: Charcoal Resolution - Calmer Transition */
@@ -754,21 +754,21 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 3.0s ease-in-out;
+    transition: opacity 4.0s ease-in-out;
 }
 
 .act2.resolve-charcoal .act2__charcoal-overlay {
     opacity: 1;
 }
 
-/* Final Message Typography - Appears AFTER color settles */
+/* Final Message Typography - Appears ONLY AFTER color settles */
 .final-message {
     text-align: center;
     color: var(--color-off-white);
     transform: translateY(20px);
     opacity: 0;
-    /* Delay 2.5s after charcoal starts fading in */
-    transition: opacity 2.0s ease-out 2.5s, transform 2.0s ease-out 2.5s;
+    /* Delay 4.0s after charcoal starts fading in (Wait for settle) */
+    transition: opacity 2.0s ease-out 4.0s, transform 2.0s ease-out 4.0s;
 }
 
 .act2.resolve-charcoal .final-message {

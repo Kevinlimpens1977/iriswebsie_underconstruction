@@ -1,15 +1,14 @@
 # ACT 2 - Door Opening, Invitation & Entry Implementation
 
-## ✅ Status: Implemented & Refined
+## ✅ Status: Implemented & Refined (Final Regie)
 
-The full Act 2 cinematic sequence is complete, flowing from a locked door to a personal entry and final resolution.
+The full Act 2 cinematic sequence is complete, featuring a slow, synchronized 10-second entry into warm light.
 
 ---
 
 ## 🎬 Narrative Timeline
 
 ### **Phase 1: Arrival (T+11.0s)**
-- Act 1 transition completes.
 - **Visual State**: Door is CLOSED.
 
 ### **Phase 2: The Hold (T+11.0s – T+11.5s)**
@@ -20,10 +19,9 @@ The full Act 2 cinematic sequence is complete, flowing from a locked door to a p
 - **Duration**: 3.0 seconds.
 - **Action**: Closed door dissolves to Open door.
 
-### **Phase 4: The Invitation (T+14.5s – T+19.5s approx)**
-- **Duration**: 5.0 seconds (Asset Duration).
+### **Phase 4: The Invitation (T+14.5s – T+19.5s)**
+- **Duration**: 5.0 seconds.
 - **Action**: **Invitation Gesture** video plays.
-- **Visual**: Hand beckons from the doorway.
 
 ### **Phase 5: The Withdrawal (T+19.5s – T+21.0s)**
 - **Trigger**: Video Ends.
@@ -33,22 +31,21 @@ The full Act 2 cinematic sequence is complete, flowing from a locked door to a p
 ### **Phase 6: The Pause (T+21.0s – T+21.3s)**
 - **Duration**: 0.3 seconds.
 - **Action**: Empty doorway holds. The path is clear.
-- **Constraint**: Hand is fully gone before movement begins.
 
-### **Phase 7: POV Entry (T+21.3s – T+26.3s)**
-- **Duration**: 5.0 seconds (Slower, intentional).
+### **Phase 7: POV Entry (T+21.3s – T+31.3s)**
+- **Duration**: **10.0 seconds** (Gentle Glide).
 - **Action**: Viewer moves through the doorway.
 - **Visual**:
-  - `transform: scale(8.0)` pulls camera deep into the room.
-  - `act2__fill-light` fades in (Warm radial gradient).
-  - Screen becomes enveloped in warm light.
+  - `transform: scale(9.0)` pulls camera deep into the room.
+  - `act2__fill-light` fades in (Warm Interior Gold: `#FFF5E1` -> `#EDC967` -> `#935430`).
+  - Screen becomes enveloped in warm light, synced exactly with forward movement.
 
-### **Phase 8: Resolution (T+26.3s+)**
+### **Phase 8: Resolution (T+31.3s+)**
 - **Action**: Light transitions to calm structure.
 - **Visual**:
-  - `act2__charcoal-overlay` fades in (Refined dark blue/charcoal).
-  - Final message "Iris — Website Under Construction" fades in.
-- **Feel**: Reassuring, premium, settled.
+  - `act2__charcoal-overlay` fades in over 4.0s (Refined dark blue/charcoal).
+  - Final message "Iris — Website Under Construction" fades in **after** color settles (4.0s delay).
+- **Feel**: Immersive, intentional, reassuring.
 
 ---
 
@@ -64,5 +61,5 @@ The full Act 2 cinematic sequence is complete, flowing from a locked door to a p
 
 ### **Key Logic**
 - Hand withdrawal logic strictly sequenced via `onended` + `setTimeout(1800)`.
-- POV duration matches Light Fill transition (5s).
-- Resolution logic chained 5s after POV start.
+- POV duration matches Light Fill transition (10s).
+- Resolution logic chained 10s after POV start.
