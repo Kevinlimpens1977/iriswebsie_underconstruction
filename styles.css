@@ -59,6 +59,36 @@ body {
 }
 
 /* --------------------------------------------------------------------------
+   Desktop Presentation Mode (Gallery View)
+   -------------------------------------------------------------------------- */
+.mobile-viewport {
+    width: 100%;
+    height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-dark-night);
+}
+
+@media (min-width: 768px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #0c0810;
+        /* Deep Gallery Charcoal */
+    }
+
+    .mobile-viewport {
+        /* Constrain to vertical phone ratio (9:16) based on viewport height */
+        width: 100%;
+        max-width: 56.25vh;
+        height: 100vh;
+        box-shadow: 0 0 120px rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* --------------------------------------------------------------------------
    Hero Section — Mobile First (9:16 portrait)
    -------------------------------------------------------------------------- */
 .hero {
@@ -502,7 +532,7 @@ body {
    Smoke Obscure Layer — Perceptual Text Disappearance
    -------------------------------------------------------------------------- */
 .smoke-obscure-layer {
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 200;
     pointer-events: none;
@@ -652,7 +682,7 @@ body {
 
 /* Transition Overlay (Deep Anthracite) */
 .transition-overlay {
-    position: fixed;
+    position: absolute;
     inset: 0;
     background: linear-gradient(180deg, #1A1D23 0%, #151719 100%);
     z-index: 300;
@@ -702,7 +732,7 @@ body {
 /* Act 2 Container (Door Scene) */
 .act2 {
     /* Always present and visible, initially behind ACT 1 */
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 50;
 
