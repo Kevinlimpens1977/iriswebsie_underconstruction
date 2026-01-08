@@ -1,0 +1,798 @@
+/* ==========================================================================
+   IRIS — Under Construction
+   Mobile-First Stylesheet
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Custom Properties (Design Tokens)
+   -------------------------------------------------------------------------- */
+:root {
+    /* Colors */
+    --color-dark-night: #23303D;
+    --color-gold: #EDC967;
+    --color-cognac: #935430;
+    --color-off-white: #EFEFEF;
+    --color-petrol: #395159;
+
+    /* Typography */
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-accent: 'Poppins', system-ui, sans-serif;
+    --font-body: 'Open Sans', system-ui, sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+
+    /* Transitions (for future use) */
+    --transition-smooth: 0.3s ease-out;
+    --transition-slow: 0.6s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base Styles
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--color-off-white);
+    background-color: var(--color-dark-night);
+    line-height: 1.6;
+    overflow: hidden;
+    /* Prevent scroll on single-page */
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section — Mobile First (9:16 portrait)
+   -------------------------------------------------------------------------- */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    /* Dynamic viewport height for mobile browsers */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Allow drop-shadow/filter effects to render outside bounds */
+    overflow: visible;
+    clip-path: inset(0);
+
+    /* Initial z-index: above ACT 2 (door at 50) */
+    z-index: 100;
+}
+
+/* Background Layer */
+.hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    /* Mobile background - optimized for portrait */
+    background-image: url('assets/bg-mobile.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    /* Fallback gradient if no image */
+    background-color: var(--color-dark-night);
+}
+
+/* Dark Overlay for Text Readability */
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(180deg,
+            rgba(35, 48, 61, 0.4) 0%,
+            rgba(35, 48, 61, 0.6) 50%,
+            rgba(35, 48, 61, 0.7) 100%);
+}
+
+/* Symbol Mark — Ghostly dark purple wandering presence */
+@keyframes ghost-wander {
+    0% {
+        transform: translate(-50%, 0) rotate(0deg);
+        opacity: 0.097;
+        filter:
+            drop-shadow(4px -2px 7px rgba(65, 45, 90, 0.45)) drop-shadow(-2px 2px 6px rgba(50, 60, 80, 0.32)) grayscale(0.85) hue-rotate(45deg) blur(0.8px);
+    }
+
+    8% {
+        transform: translate(-58%, 4%) rotate(1.8deg);
+        opacity: 0.113;
+        filter:
+            drop-shadow(-4px -3px 8px rgba(65, 45, 90, 0.52)) drop-shadow(3px 1px 6px rgba(50, 60, 80, 0.26)) grayscale(0.85) hue-rotate(45deg) blur(0.6px);
+    }
+
+    18% {
+        transform: translate(-44%, 7%) rotate(-1.2deg);
+        opacity: 0.089;
+        filter:
+            drop-shadow(2px 4px 7px rgba(50, 60, 80, 0.34)) drop-shadow(-4px -1px 6px rgba(65, 45, 90, 0.32)) grayscale(0.85) hue-rotate(45deg) blur(1px);
+    }
+
+    28% {
+        transform: translate(-54%, 1%) rotate(2.4deg);
+        opacity: 0.122;
+        filter:
+            drop-shadow(5px 0px 8px rgba(65, 45, 90, 0.50)) drop-shadow(-3px 3px 7px rgba(50, 60, 80, 0.35)) grayscale(0.85) hue-rotate(45deg) blur(0.5px);
+    }
+
+    38% {
+        transform: translate(-42%, 5%) rotate(-0.6deg);
+        opacity: 0.081;
+        filter:
+            drop-shadow(-3px -3px 6px rgba(50, 60, 80, 0.32)) drop-shadow(3px 4px 7px rgba(65, 45, 90, 0.26)) grayscale(0.85) hue-rotate(45deg) blur(1.2px);
+    }
+
+    48% {
+        transform: translate(-57%, 2%) rotate(1.2deg);
+        opacity: 0.113;
+        filter:
+            drop-shadow(4px 3px 8px rgba(65, 45, 90, 0.55)) drop-shadow(-4px -2px 6px rgba(50, 60, 80, 0.26)) grayscale(0.85) hue-rotate(45deg) blur(0.6px);
+    }
+
+    58% {
+        transform: translate(-43%, 8%) rotate(-1.8deg);
+        opacity: 0.097;
+        filter:
+            drop-shadow(-2px 2px 7px rgba(50, 60, 80, 0.36)) drop-shadow(4px -1px 6px rgba(65, 45, 90, 0.34)) grayscale(0.85) hue-rotate(45deg) blur(0.9px);
+    }
+
+    68% {
+        transform: translate(-52%, -1%) rotate(0.6deg);
+        opacity: 0.105;
+        filter:
+            drop-shadow(3px -3px 7px rgba(65, 45, 90, 0.47)) drop-shadow(-3px 2px 6px rgba(50, 60, 80, 0.29)) grayscale(0.85) hue-rotate(45deg) blur(0.7px);
+    }
+
+    78% {
+        transform: translate(-45%, 4%) rotate(-2.4deg);
+        opacity: 0.089;
+        filter:
+            drop-shadow(-4px 1px 7px rgba(50, 60, 80, 0.39)) drop-shadow(4px -2px 6px rgba(65, 45, 90, 0.36)) grayscale(0.85) hue-rotate(45deg) blur(1.1px);
+    }
+
+    88% {
+        transform: translate(-56%, 5%) rotate(1.5deg);
+        opacity: 0.113;
+        filter:
+            drop-shadow(2px 3px 8px rgba(65, 45, 90, 0.51)) drop-shadow(-3px -1px 6px rgba(50, 60, 80, 0.28)) grayscale(0.85) hue-rotate(45deg) blur(0.65px);
+    }
+
+    100% {
+        transform: translate(-50%, 0) rotate(0deg);
+        opacity: 0.097;
+        filter:
+            drop-shadow(4px -2px 7px rgba(65, 45, 90, 0.45)) drop-shadow(-2px 2px 6px rgba(50, 60, 80, 0.32)) grayscale(0.85) hue-rotate(45deg) blur(0.8px);
+    }
+}
+
+.hero__symbol-mark {
+    position: absolute;
+    z-index: 6;
+    /* Above smoke (3) and portal-presence (5), below text (10) */
+    pointer-events: none;
+
+    /* High upper area — suspended ghost zone */
+    top: 6%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    /* Explicit sizing — 30% smaller */
+    width: 35vw;
+    height: 20vh;
+    min-width: 155px;
+    min-height: 100px;
+    max-width: 420px;
+    max-height: 210px;
+
+    /* Iris logo — dark purple-tinted */
+    background-image: url('assets/iris.png');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    /* Dark purple presence with intense edge glow */
+    opacity: 0.097;
+    filter:
+        drop-shadow(4px -2px 7px rgba(65, 45, 90, 0.45)) drop-shadow(-2px 2px 6px rgba(50, 60, 80, 0.32)) grayscale(0.85) hue-rotate(45deg) blur(0.8px);
+
+    /* Slow ghostly wandering */
+    animation: ghost-wander 45s ease-in-out infinite;
+}
+
+/* Portal/Door Layer — Atmospheric depth layer (FINAL) */
+.hero__portal-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+
+    /* Mobile/Tablet: subtle atmospheric presence */
+    opacity: 0.08;
+    visibility: visible;
+}
+
+/* Portal layer video element */
+.hero__portal-layer video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Portal Presence — Psychological focal point */
+.hero__portal-presence {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+
+    /* Centered positioning */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Proportional sizing - portrait on mobile, landscape on desktop */
+    width: 60vw;
+    height: 70vh;
+    max-width: 500px;
+    max-height: 600px;
+
+    /* Subtle midtone lift - a quiet clearing in the darkness */
+    background: radial-gradient(ellipse at center,
+            rgba(239, 239, 239, 0.04) 0%,
+            rgba(239, 239, 239, 0.025) 35%,
+            rgba(239, 239, 239, 0) 70%,
+            rgba(35, 48, 61, 0) 100%);
+
+    /* Soft edges - no visible boundary */
+    border-radius: 50%;
+}
+
+/* Desktop: wider presence */
+@media (min-width: 1024px) {
+    .hero__portal-presence {
+        width: 50vw;
+        height: 60vh;
+        max-width: 700px;
+        max-height: 500px;
+    }
+}
+
+/* Content Container */
+.hero__content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: var(--space-lg);
+    max-width: 90%;
+
+    /* Upward shift for focal alignment (lamp area) */
+    transform: translateY(-15vh);
+}
+
+/* Headline — grounded, authoritative, ritual-like */
+.hero__headline {
+    font-family: var(--font-heading);
+    /* Increased authority and contrast */
+    font-weight: 700;
+    font-size: clamp(2.2rem, 9vw, 4.2rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-off-white);
+
+    /* Move subtitle closer */
+    margin-bottom: var(--space-xs);
+
+    /* Stronger depth */
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Subline — quieter echo of the headline */
+.hero__subline {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+    letter-spacing: 0.08em;
+    color: var(--color-off-white);
+
+    /* Increased readability/contrast */
+    opacity: 0.9;
+
+    /* Single line constraint */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Accent text — warm, secondary, suggestive */
+.hero__accent {
+    font-family: var(--font-accent);
+    font-weight: 400;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    opacity: 0.75;
+    margin-top: var(--space-lg);
+}
+
+/* Letter-by-letter reveal — controlled by JavaScript for looping */
+.hero__accent .char {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
+
+.hero__accent .char.visible {
+    opacity: 1;
+}
+
+/* Static fallback when JS is disabled */
+.no-js .hero__accent .char {
+    opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet Styles (min-width: 768px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+    .hero__content {
+        max-width: 70%;
+        padding: var(--space-xl);
+    }
+
+    .hero__headline {
+        letter-spacing: 0.2em;
+    }
+
+    .hero__subline {
+        letter-spacing: 0.15em;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Styles (min-width: 1024px) — Landscape 16:9
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+    .hero__background {
+        /* Desktop background - optimized for landscape */
+        background-image: url('assets/bg-desktop.jpg');
+
+        /* Falls back to mobile if desktop doesn't exist */
+        background-image: url('assets/bg-mobile.jpg');
+        background-image:
+            image-set(url('assets/bg-desktop.jpg') 1x,
+                url('assets/bg-desktop@2x.jpg') 2x);
+    }
+
+    /* Adjust overlay for wider screens */
+    .hero__overlay {
+        background: radial-gradient(ellipse at center,
+                rgba(35, 48, 61, 0.3) 0%,
+                rgba(35, 48, 61, 0.6) 60%,
+                rgba(35, 48, 61, 0.8) 100%);
+    }
+
+    .hero__content {
+        max-width: 60%;
+    }
+
+    .hero__headline {
+        letter-spacing: 0.25em;
+    }
+
+    /* Desktop-only atmospheric layer */
+    .hero__portal-layer {
+        opacity: 0.12;
+        visibility: visible;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Large Desktop Styles (min-width: 1440px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1440px) {
+    .hero__content {
+        max-width: 50%;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion — Respect user preferences
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    /* Completely disable atmospheric layer for reduced motion */
+    .hero__portal-layer {
+        display: none !important;
+    }
+
+    /* Static, extremely faint edge hint for reduced motion */
+    .hero__symbol-mark {
+        animation: none !important;
+        opacity: 0.02 !important;
+        filter:
+            drop-shadow(2px -1px 3px rgba(147, 84, 48, 0.1)) blur(1.5px) !important;
+        transform: translateX(-50%) !important;
+    }
+
+    /* Show accent text immediately without animation */
+    .hero__accent .char {
+        opacity: 1 !important;
+        animation: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Utility Classes (for future use)
+   -------------------------------------------------------------------------- */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Act 1 CTA & Transition Layers
+   -------------------------------------------------------------------------- */
+.act1-cta {
+    position: absolute;
+    /* Repositioned to tension zone (approx 55% height, lampshade area) */
+    top: 55vh;
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    width: 100%;
+    max-width: 600px;
+    padding: 0 var(--space-md);
+
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--color-off-white);
+    text-align: center;
+    letter-spacing: 0.05em;
+
+    opacity: 0;
+    transition: opacity 1.5s ease-out, text-shadow 0.3s ease;
+    pointer-events: none;
+}
+
+.act1-cta.visible {
+    /* Stronger presence */
+    opacity: 0.85;
+}
+
+.act1-cta.interactive {
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(237, 201, 103, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Smoke Obscure Layer — Perceptual Text Disappearance
+   -------------------------------------------------------------------------- */
+.smoke-obscure-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+
+    /* Deep purple gradient smoke */
+    background: radial-gradient(ellipse at 45% 40%,
+            rgba(61, 42, 79, 0.75) 0%,
+            rgba(74, 51, 93, 0.68) 25%,
+            rgba(90, 74, 107, 0.55) 50%,
+            rgba(61, 42, 79, 0.65) 75%,
+            rgba(35, 48, 61, 0.7) 100%);
+
+    /* Soft-light blend for organic integration */
+    mix-blend-mode: soft-light;
+
+    /* Apply subtle blur for readability suppression */
+    backdrop-filter: blur(0px);
+
+    /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+
+    /* GPU acceleration */
+    will-change: opacity, transform;
+
+    /* Initial position for upward drift */
+    transform: translateY(0);
+}
+
+/* Active state (triggered) — Extended to 11s (200% of original) */
+.smoke-obscure-layer.active {
+    visibility: visible;
+    animation: smoke-intensify 11s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+/* Dissolution state (door emerging) */
+.smoke-obscure-layer.dissolving {
+    animation: smoke-dissolve 4.0s cubic-bezier(0.2, 0.0, 0.2, 1) forwards;
+}
+
+/* Smoke intensify animation — Extended to 11 seconds
+   Timeline within animation:
+   0-4s: Gentle rise (Atmosphere phase)
+   4-6.5s: Thickening (Disappearance phase, text fading)
+   6.5s+: Peak hold (Reveal phase begins)
+*/
+@keyframes smoke-intensify {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(1);
+        backdrop-filter: blur(0px);
+    }
+
+    /* T+1.0s (~9% into animation) - Smoke starts visibility */
+    9% {
+        opacity: 0.08;
+        transform: translateY(-0.3vh) scale(1.005);
+        backdrop-filter: blur(0.3px);
+    }
+
+    /* T+4.0s (~36% into animation) - End of Atmosphere, smoke at 40% */
+    36% {
+        opacity: 0.40;
+        transform: translateY(-1vh) scale(1.015);
+        backdrop-filter: blur(2px);
+    }
+
+    /* T+5.5s (~50% into animation) - Mid Disappearance, smoke thickening */
+    50% {
+        opacity: 0.58;
+        transform: translateY(-2vh) scale(1.025);
+        backdrop-filter: blur(3.5px);
+    }
+
+    /* T+6.5s (~59% into animation) - End of Disappearance, smoke at 65% peak */
+    59% {
+        opacity: 0.65;
+        transform: translateY(-2.5vh) scale(1.03);
+        backdrop-filter: blur(4.5px);
+    }
+
+    /* T+7.0s (~64% into animation) - Start of Reveal, smoke holds */
+    64% {
+        opacity: 0.65;
+        transform: translateY(-2.5vh) scale(1.03);
+        backdrop-filter: blur(4.5px);
+    }
+
+    /* Hold at peak until dissolution begins */
+    100% {
+        opacity: 0.65;
+        transform: translateY(-2.5vh) scale(1.03);
+        backdrop-filter: blur(4.5px);
+    }
+}
+
+/* Smoke dissolve animation — slow density reduction, 4 seconds */
+@keyframes smoke-dissolve {
+    0% {
+        opacity: 0.78;
+        transform: translateY(-3vh) scale(1.05);
+        backdrop-filter: blur(5px);
+    }
+
+    30% {
+        opacity: 0.55;
+        transform: translateY(-3.5vh) scale(1.07);
+        backdrop-filter: blur(3px);
+    }
+
+    60% {
+        opacity: 0.3;
+        transform: translateY(-4.5vh) scale(1.10);
+        backdrop-filter: blur(2px);
+    }
+
+    85% {
+        opacity: 0.1;
+        transform: translateY(-5.5vh) scale(1.13);
+        backdrop-filter: blur(0.5px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-6vh) scale(1.15);
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* Fallback for browsers without mix-blend-mode */
+@supports not (mix-blend-mode: soft-light) {
+    .smoke-obscure-layer {
+        mix-blend-mode: multiply;
+    }
+}
+
+/* Reduced motion: instant opacity change, no drift */
+@media (prefers-reduced-motion: reduce) {
+    .smoke-obscure-layer.active {
+        animation: none;
+        opacity: 0.7;
+        transform: translateY(0);
+        backdrop-filter: blur(0px);
+        transition: opacity 0.1s linear;
+    }
+}
+
+/* Transition Overlay (Deep Anthracite) */
+.transition-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, #1A1D23 0%, #151719 100%);
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+
+    /* GPU acceleration */
+    will-change: opacity, transform;
+    transform: translateY(0);
+}
+
+.transition-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+    animation: overlay-fade-in 1.3s cubic-bezier(0.4, 0.0, 0.6, 1) forwards;
+}
+
+.transition-overlay.fade-out {
+    animation: overlay-fade-out 1.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+/* Overlay fade-in — NEVER full blackout, max 0.85 */
+@keyframes overlay-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0.85;
+        transform: translateY(-3vh);
+    }
+}
+
+/* Overlay fade-out (no movement) */
+@keyframes overlay-fade-out {
+    0% {
+        opacity: 0.85;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Act 2 Container (Door Scene) */
+.act2 {
+    /* Always present and visible, initially behind ACT 1 */
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+
+    /* Initially at full opacity but behind ACT 1 */
+    opacity: 1;
+    visibility: visible;
+
+    background-image: url('assets/deurdicht.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--color-dark-night);
+
+    /* GPU acceleration */
+    will-change: opacity, filter;
+}
+
+/* Door Reveal Animation - PHASE 3 ONLY
+   Starts at T+6.5s when z-index swaps
+   Door fades in from darker to brighter (ease-out)
+   Duration: 2s (6.5s - 8.5s)
+*/
+.act2.door-reveal {
+    animation: door-fade-in 2s cubic-bezier(0.2, 0.0, 0.2, 1) forwards;
+}
+
+@keyframes door-fade-in {
+    0% {
+        opacity: 0;
+        filter: brightness(0.7);
+    }
+
+    40% {
+        opacity: 0.3;
+        filter: brightness(0.8);
+    }
+
+    70% {
+        opacity: 0.7;
+        filter: brightness(0.92);
+    }
+
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   ACT 1 Transition Animations
+   -------------------------------------------------------------------------- */
+
+/* Text Fade-Out Animation - PHASE 2 ONLY
+   Starts at T+4.0s, ends at T+6.5s
+   Total duration: 2.5s
+   Easing: ease-in-out for soft, human disappearance
+   
+   Animation is applied to hero content (text elements)
+*/
+.hero.text-fadeout .hero__content,
+.hero.text-fadeout .act1-cta {
+    animation: text-disappear 2.5s cubic-bezier(0.4, 0.0, 0.6, 1) forwards;
+    animation-delay: 4s;
+}
+
+@keyframes text-disappear {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Background Fade-Out Animation - PHASE 3
+   Starts at T+6.5s when z-index swaps
+   Duration: 2s (6.5s - 8.5s)
+*/
+.hero.background-fadeout .hero__background,
+.hero.background-fadeout .hero__overlay {
+    animation: background-disappear 2s ease-out forwards;
+}
+
+@keyframes background-disappear {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

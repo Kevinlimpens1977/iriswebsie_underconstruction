@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl" class="no-js">
+<script>document.documentElement.classList.remove('no-js');</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Iris — De deur wacht. Niet alles openbaart zich meteen.">
+    <meta name="theme-color" content="#23303D">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Open+Sans:wght@300;400&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css?v=zindex_fix">
+
+    <title>Iris — Binnenkort</title>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="hero" aria-label="Iris binnenkort beschikbaar">
+        <!-- Background layer -->
+        <div class="hero__background" aria-hidden="true"></div>
+
+        <!-- Dark overlay for text readability -->
+        <div class="hero__overlay" aria-hidden="true"></div>
+
+        <!-- Symbol mark — hidden sign within the atmosphere -->
+        <div class="hero__symbol-mark" aria-hidden="true"></div>
+
+        <!-- Atmospheric portal layer -->
+        <div class="hero__portal-layer" aria-hidden="true">
+            <video autoplay loop muted playsinline preload="metadata">
+                <source src="assets/smoke-loop.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Portal presence — psychological focal point -->
+        <div class="hero__portal-presence" aria-hidden="true"></div>
+
+        <main class="hero__content">
+            <h1 class="hero__headline">De Deur Wacht</h1>
+            <p class="hero__subline">Niet alles openbaart zich meteen.</p>
+            <p class="hero__accent" aria-label="Binnenkort..."><span class="char">B</span><span
+                    class="char">i</span><span class="char">n</span><span class="char">n</span><span
+                    class="char">e</span><span class="char">n</span><span class="char">k</span><span
+                    class="char">o</span><span class="char">r</span><span class="char">t</span><span
+                    class="char">.</span><span class="char">.</span><span class="char">.</span></p>
+        </main>
+
+        <!-- Act 1 CTA (Dynamic) -->
+        <div id="act1-cta" class="act1-cta" aria-live="polite"></div>
+    </section>
+
+    <!-- Smoke Obscure Layer (Perceptual Text Disappearance) -->
+    <div id="smoke-obscure-layer" class="smoke-obscure-layer" aria-hidden="true"></div>
+
+    <!-- Transition Overlay -->
+    <div id="transition-overlay" class="transition-overlay" aria-hidden="true"></div>
+
+    <!-- Act 2: The Door -->
+    <section id="act2" class="act2" aria-label="De Deur">
+        <!-- Act 2 content will go here -->
+    </section>
+
+    <!-- Accent text reveal animation -->
+    <script src="accent-reveal.js"></script>
+    <!-- Scene Transition Logic -->
+    <script src="transition.js?v=zindex_swap"></script>
+</body>
+
+</html>
