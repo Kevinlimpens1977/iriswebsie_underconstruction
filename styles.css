@@ -820,7 +820,26 @@ body {
     z-index: 25;
 }
 
-/* Common Stage Layout */
+/* Card Container - Elegant Frame */
+.glass-card {
+    background: rgba(30, 20, 50, 0.4);
+    /* Deep subtle purple tint */
+    border: 1px solid rgba(237, 201, 103, 0.25);
+    /* Muted Gold Border */
+    border-radius: 16px;
+    padding: 5vh 6vw;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+    width: 100%;
+}
+
+/* Common Stage Layout - Pure Center */
 .final-stage-a,
 .final-stage-b {
     position: absolute;
@@ -828,31 +847,23 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: center;
     color: #E8E3E8;
     transition: opacity 2.0s ease-in-out;
     width: 100%;
-    /* Ensure stages don't overflow */
 }
 
-/* Stage A: Meaning - Slightly elevated center */
+/* Stage A: Default Visible */
 .final-stage-a {
     z-index: 2;
     opacity: 1;
-    justify-content: center;
-    padding-bottom: 20vh;
-    /* Lifted higher for visual balance */
-    gap: 4vh;
 }
 
-/* Stage B: Contact - Top-down flow */
+/* Stage B: Hidden Initially */
 .final-stage-b {
     z-index: 3;
     opacity: 0;
     pointer-events: none;
-    justify-content: flex-start;
-    padding-top: 22vh;
-    gap: 3vh;
 }
 
 /* Base transition state for all children */
