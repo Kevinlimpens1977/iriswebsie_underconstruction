@@ -156,6 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Triggered after POV completes
                             setTimeout(() => {
                                 act2.classList.add('resolve-charcoal');
+                                // Trigger breathing background
+                                const overlay = act2.querySelector('.act2__charcoal-overlay');
+                                if (overlay) overlay.classList.add('active-breathe');
                             }, 12000);
 
                         }, 1800);

@@ -90,19 +90,22 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
 
+    /* Micro-contrast & Saturation boost (Tactile Feel) */
+    filter: contrast(1.15) saturate(1.15);
+
     /* Fallback gradient if no image */
     background-color: var(--color-dark-night);
 }
 
-/* Dark Overlay for Text Readability */
+/* Dark Overlay for Text Readability - Deep Violet grading */
 .hero__overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
     background: linear-gradient(180deg,
-            rgba(35, 48, 61, 0.4) 0%,
-            rgba(35, 48, 61, 0.6) 50%,
-            rgba(35, 48, 61, 0.7) 100%);
+            rgba(15, 5, 25, 0.3) 0%,
+            rgba(15, 5, 25, 0.6) 50%,
+            rgba(10, 0, 15, 0.8) 100%);
 }
 
 /* Symbol Mark — Ghostly dark purple wandering presence */
@@ -226,8 +229,8 @@ body {
     z-index: 3;
     pointer-events: none;
 
-    /* Mobile/Tablet: subtle atmospheric presence */
-    opacity: 0.08;
+    /* Mobile/Tablet: subtle atmospheric presence (Reduced) */
+    opacity: 0.04;
     visibility: visible;
 }
 
@@ -375,19 +378,15 @@ body {
         /* Desktop background - optimized for landscape */
         background-image: url('assets/bg-desktop.jpg');
 
-        /* Falls back to mobile if desktop doesn't exist */
-        background-image: url('assets/bg-mobile.jpg');
-        background-image:
-            image-set(url('assets/bg-desktop.jpg') 1x,
-                url('assets/bg-desktop@2x.jpg') 2x);
+        background-image: url('assets/bg-desktop.jpg');
     }
 
-    /* Adjust overlay for wider screens */
+    /* Adjust overlay for wider screens - Deep Violet/Black */
     .hero__overlay {
         background: radial-gradient(ellipse at center,
-                rgba(35, 48, 61, 0.3) 0%,
-                rgba(35, 48, 61, 0.6) 60%,
-                rgba(35, 48, 61, 0.8) 100%);
+                rgba(15, 5, 25, 0.2) 0%,
+                rgba(15, 5, 25, 0.5) 60%,
+                rgba(10, 0, 15, 0.85) 100%);
     }
 
     .hero__content {
@@ -398,9 +397,9 @@ body {
         letter-spacing: 0.25em;
     }
 
-    /* Desktop-only atmospheric layer */
+    /* Desktop-only atmospheric layer (Reduced) */
     .hero__portal-layer {
-        opacity: 0.12;
+        opacity: 0.05;
         visibility: visible;
     }
 }
@@ -744,55 +743,173 @@ body {
     /* Envelope screen in purple light */
 }
 
-/* Act 2C: Deep Purple Resolution */
+/* Act 2C: Deep Purple Resolution - Breathing Background */
 .act2__charcoal-overlay {
     position: absolute;
     inset: 0;
     z-index: 20;
-    /* Final State: Deep Dark Purple */
     background-color: #180828;
+    /* Subtle breathing gradient overlay ("licht ademt") */
+    background-image: radial-gradient(circle at 50% 40%, #2a1b4d 0%, #180828 70%);
+    background-size: 150% 150%;
+
     opacity: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+
     transition: opacity 4.0s ease-in-out;
+    will-change: opacity, background-size;
+}
+
+.act2__charcoal-overlay.active-breathe {
+    animation: bg-breathe 12s ease-in-out infinite alternate;
+}
+
+@keyframes bg-breathe {
+    0% {
+        background-size: 140% 140%;
+    }
+
+    100% {
+        background-size: 160% 160%;
+    }
 }
 
 .act2.resolve-charcoal .act2__charcoal-overlay {
     opacity: 1;
 }
 
-/* Final Message Typography - Appears ONLY AFTER color settles */
-.final-message {
+/* Final Content Container */
+.final-content {
     text-align: center;
-    color: var(--color-off-white);
-    transform: translateY(20px);
-    opacity: 0;
-    /* Delay 4.0s after charcoal starts fading in (Wait for settle) */
-    transition: opacity 2.0s ease-out 4.0s, transform 2.0s ease-out 4.0s;
+    color: #E8E3E8;
+    /* Soft warm off-white */
+    width: 100%;
+    max-width: 650px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5vh;
 }
 
-.act2.resolve-charcoal .final-message {
+/* Base transition state for all children */
+.final-logo,
+.final-line-1,
+.final-line-2,
+.final-line-3,
+.final-contact,
+.final-footer {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2.5s ease-out, transform 2.5s ease-out;
+}
+
+/* 1. Logo - Soft Glow */
+.final-logo {
+    width: 140px;
+    height: auto;
+    margin-bottom: 3vh;
+    filter: drop-shadow(0 0 20px rgba(233, 213, 255, 0.15));
+    transition-delay: 1.0s;
+}
+
+/* 2. "De deur is open" - Calm, Large */
+.final-line-1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: #FFF5E1;
+    transition-delay: 3.0s;
+}
+
+/* 3. "Wat daarachter ontstaat..." - Softer */
+.final-line-2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-style: italic;
+    letter-spacing: 0.05em;
+    margin-bottom: 3vh;
+    transition-delay: 6.0s;
+    /* Pause before this */
+}
+
+/* 4. Descriptive List - Sensual */
+.final-line-3 {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    margin-bottom: 4vh;
+    transition-delay: 9.0s;
+    /* Another pause */
+}
+
+/* 5. Contact - Whispered */
+.final-contact {
+    font-family: var(--font-accent);
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    line-height: 1.6;
+    margin-bottom: 4vh;
+    transition-delay: 12.0s;
+}
+
+.contact-name {
+    font-weight: 500;
+    color: #FFF;
+    margin-bottom: 0.5rem;
+}
+
+.contact-detail {
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* 6. Footer - Very Subtle */
+.final-footer {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    transition-delay: 14.0s;
+}
+
+/* Reveal States (Target Opacities) */
+.act2.resolve-charcoal .final-logo {
     opacity: 1;
     transform: translateY(0);
 }
 
-.final-message__title {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    letter-spacing: 0.1em;
-    font-weight: 300;
-    margin-bottom: var(--space-xs);
-    color: var(--color-gold);
+.act2.resolve-charcoal .final-line-1 {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.final-message__subtitle {
-    font-family: var(--font-accent);
-    font-size: 0.9rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.7;
+.act2.resolve-charcoal .final-line-2 {
+    opacity: 0.85;
+    transform: translateY(0);
 }
+
+.act2.resolve-charcoal .final-line-3 {
+    opacity: 0.75;
+    transform: translateY(0);
+}
+
+.act2.resolve-charcoal .final-contact {
+    opacity: 0.6;
+    transform: translateY(0);
+}
+
+.act2.resolve-charcoal .final-footer {
+    opacity: 0.3;
+    transform: translateY(0);
+}
+
+
 
 /* ACT 2 Layers */
 .act2__open,

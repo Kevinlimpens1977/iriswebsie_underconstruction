@@ -1,63 +1,44 @@
 # ACT 2 - Door Opening, Invitation & Entry Implementation
 
-## ✅ Status: Implemented & Refined (Final Transition: Purple Drift)
+## ✅ Status: Implemented & Refined (Final Concept: "The Door Remains Open")
 
-The full Act 2 cinematic sequence is complete. The viewer is never forced through the door but is instead dissolved into the interior purple light.
+The full Act 2 cinematic sequence is complete. The viewer is absorbed into the light and arrives at a poetic, breathing final state.
 
 ---
 
 ## 🎬 Narrative Timeline
 
-### **Phase 1: Arrival (T+11.0s)**
-- **Visual State**: Door is CLOSED.
-
-### **Phase 2: The Hold (T+11.0s – T+11.5s)**
-- **Duration**: 0.5 seconds.
-- Stillness.
-
-### **Phase 3: The Opening (T+11.5s – T+14.5s)**
-- **Duration**: 3.0 seconds.
-- **Action**: Closed door dissolves to Open door.
-
-### **Phase 4: The Invitation (T+14.5s – T+19.5s)**
-- **Duration**: 5.0 seconds.
-- **Action**: **Invitation Gesture** video plays.
-
-### **Phase 5: The Withdrawal (T+19.5s – T+21.0s)**
-- **Trigger**: Video Ends.
-- **Action**: Hand fades into darkness (1.5s).
-
-### **Phase 6: The Pause (T+21.0s – T+21.3s)**
-- **Duration**: 0.3 seconds.
-- **Action**: Empty doorway holds.
+### **Phase 1-6** (Unchanged)
+- Arrival, Door Opening, Invitation, Withdrawal, Hold.
 
 ### **Phase 7: POV Drift (T+21.3s – T+33.3s)**
 - **Duration**: **12.0 seconds** (Extremely Slow Drift).
 - **Movement**: `scale(3.0)` (Subtle forward drift).
-- **Effect**: The viewer drifts towards the light but is absorbed before reaching the threshold.
-- **Visual**:
-  - `act2__fill-light` fades in (Purples: `#E9D5FF` -> `#9333EA` -> `#581C87`).
-  - Screen becomes enveloped in intense interior purple light.
+- **Effect**: Absorb into intense Purple Light (`act2__fill-light`).
 
 ### **Phase 8: Resolution (T+33.3s+)**
-- **Action**: Light transitions to Deep Dark Purple structure.
-- **Visual**:
-  - `act2__charcoal-overlay` fades in over 4.0s (Deep Dark Purple `#180828`).
-  - Final message "Iris — Website Under Construction" fades in **after** color settles (4.0s delay).
-- **End State**: A calm, premium, deep purple field.
+- **Trigger**: 12s after POV start.
+- **Background**: Deep Dark Purple (`#180828`) fades in (4s).
+- **Animation**: Background "breathes" (slow radial gradient pulse).
+- **Content Reveal**: Staggered, poetic sequence.
+
+### **Phase 9: The Poem (Staggered)**
+- **T+1.0s (after Res)**: **Logo** (Soft Glow) fades in.
+- **T+3.0s**: **"De deur is open."** (Large, Calm).
+- **T+6.0s**: **"Wat daarachter ontstaat, maken we samen."** (Italic, Soft).
+- **T+9.0s**: **Description** (Latex, Interior, Custom).
+- **T+12.0s**: **Contact** (Whispered: Name, Phone, Email).
+- **T+14.0s**: **Footer** (Building/Possibilities).
 
 ---
 
 ## 🔧 Technical Structures
 
-### **Layer Stack**
-1.  **.act2__open** (Z:1)
-2.  **.act2__invitation** (Z:1)
-3.  **.act2__closed** (Z:2)
-4.  **.act2__fill-light** (Z:10) - Purple Gradient
-5.  **.act2__charcoal-overlay** (Z:20) - Deep Purple Background
-6.  **.final-message** (Inside Z:20) - Typography
+### **Final Overlay (`.act2__charcoal-overlay`)**
+- `background-image`: Radial gradient breathing.
+- `animation`: 12s infinite alternate loop.
 
-### **Key Logic**
-- POV duration extended to 12s.
-- Resolution logic chained 12s after POV start.
+### **Typography**
+- **Primary**: Cormorant Garamond (Heading).
+- **Secondary**: Open Sans (Body), Poppins (Contact).
+- **Colors**: Soft Off-White (`#E8E3E8`), Warm Gold Accents (`#FFF5E1`).
