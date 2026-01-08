@@ -817,19 +817,37 @@ body {
     position: absolute;
     /* Safe Zone: Central 76% vertical, 10% margins sides */
     inset: 12vh 5% 12vh 5%;
+    z-index: 25;
+    /* Content wrapper for stages */
+}
 
+/* Common Stage Layout - Vertical Center */
+.final-stage-a,
+.final-stage-b {
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Balanced vertical rhythm */
     gap: 3vh;
     /* Fluid vertical spacing */
-
     text-align: center;
     color: #E8E3E8;
-    z-index: 25;
-    /* Ensure above overlay breathing */
+    transition: opacity 2.0s ease-in-out;
+}
+
+/* Stage A: Default Visible layer */
+.final-stage-a {
+    z-index: 2;
+    opacity: 1;
+}
+
+/* Stage B: Hidden Initially */
+.final-stage-b {
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Base transition state for all children */
@@ -844,61 +862,56 @@ body {
     transition: opacity 2.5s ease-out, transform 2.5s ease-out;
 }
 
-/* 1. Logo - Subtle Presence */
+/* --- Typography Styles --- */
+
+/* 1. Logo (Stage B) - Subtle Presence */
 .final-logo {
-    width: 80px;
-    /* Reduced for elegance */
+    width: 90px;
     height: auto;
     filter: drop-shadow(0 0 15px rgba(233, 213, 255, 0.2));
-    transition-delay: 1.0s;
     margin-bottom: 2vh;
 }
 
-/* 2. Primary Line - Elevated, Fashion Editorial */
+/* 2. Primary Line (Stage A) - Elevated */
 .final-line-1 {
     font-family: var(--font-heading);
-    /* Responsive sizing safely within 9:16 */
     font-size: clamp(1.8rem, 4vh, 2.6rem);
     font-weight: 300;
     line-height: 1.1;
     letter-spacing: 0.05em;
     color: #FFF5E1;
-    transition-delay: 3.0s;
+    transition-delay: 1.0s;
 }
 
-/* 3. Supporting Line - Soft & Italic */
+/* 3. Supporting Line (Stage A) */
 .final-line-2 {
     font-family: var(--font-heading);
     font-size: clamp(1.1rem, 2.2vh, 1.4rem);
     font-style: italic;
     opacity: 0.85;
     margin-bottom: 2vh;
-    transition-delay: 6.0s;
+    transition-delay: 4.0s;
 }
 
-/* 4. Description - Sensual Breathing Space */
+/* 4. Description (Stage A) */
 .final-line-3 {
     font-family: var(--font-body);
     font-size: clamp(0.85rem, 1.8vh, 1rem);
     line-height: 2.0;
-    /* Airy */
     letter-spacing: 0.05em;
     opacity: 0.75;
-    /* Prevent extra wide lines */
     max-width: 35ch;
     margin-bottom: auto;
-    /* Push contact down slightly */
-    transition-delay: 9.0s;
+    transition-delay: 7.0s;
 }
 
-/* 5. Contact - Discreet & Accessible */
+/* 5. Contact (Stage B) */
 .final-contact {
     font-family: var(--font-accent);
     font-size: clamp(0.75rem, 1.6vh, 0.9rem);
     letter-spacing: 0.1em;
     line-height: 1.8;
     opacity: 0.6;
-    transition-delay: 12.0s;
 }
 
 .contact-name {
@@ -912,21 +925,17 @@ body {
     opacity: 0.9;
 }
 
-/* 6. Footer - Barely There */
+/* 6. Footer (Stage B) */
 .final-footer {
     font-family: var(--font-body);
     font-size: 0.7rem;
     opacity: 0.25;
     margin-top: 1vh;
-    transition-delay: 14.0s;
 }
 
-/* Reveal States */
-.act2.resolve-charcoal .final-logo {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* --- Reveal Logic --- */
 
+/* Reveal Stage A elements upon Charcoal Resolution */
 .act2.resolve-charcoal .final-line-1 {
     opacity: 1;
     transform: translateY(0);
@@ -942,14 +951,37 @@ body {
     transform: translateY(0);
 }
 
-.act2.resolve-charcoal .final-contact {
-    opacity: 0.6;
-    transform: translateY(0);
+/* Switch to Stage B */
+.act2.stage-b-active .final-stage-a {
+    opacity: 0;
+    transition-delay: 0s;
 }
 
-.act2.resolve-charcoal .final-footer {
+.act2.stage-b-active .final-stage-b {
+    opacity: 1;
+    pointer-events: auto;
+    /* Wait for A to fade (2s) + Pause (1s) */
+    transition-delay: 3.0s;
+}
+
+/* Reveal Stage B elements when Stage B is Active */
+.act2.stage-b-active .final-logo {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 3.5s;
+    /* Relative to B start logic effectively */
+}
+
+.act2.stage-b-active .final-contact {
+    opacity: 0.6;
+    transform: translateY(0);
+    transition-delay: 5.0s;
+}
+
+.act2.stage-b-active .final-footer {
     opacity: 0.3;
     transform: translateY(0);
+    transition-delay: 6.5s;
 }
 
 

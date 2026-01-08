@@ -159,6 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 // Trigger breathing background
                                 const overlay = act2.querySelector('.act2__charcoal-overlay');
                                 if (overlay) overlay.classList.add('active-breathe');
+
+                                // Phase 9: Stage B Reveal (Connection)
+                                // Wait for Stage A to finish reading (18s hold)
+                                setTimeout(() => {
+                                    act2.classList.add('stage-b-active');
+                                }, 18000);
                             }, 12000);
 
                         }, 1800);
