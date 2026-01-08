@@ -815,10 +815,9 @@ body {
 .final-content {
     /* Absolute centering with strict safe margins */
     position: absolute;
-    /* Safe Zone: Central 76% vertical, 10% margins sides */
-    inset: 12vh 5% 12vh 5%;
+    /* Safe Zone: Central, with wider horizontal margins for narrow screens */
+    inset: 10vh 8vw 10vh 8vw;
     z-index: 25;
-    /* Content wrapper for stages */
 }
 
 /* Common Stage Layout */
@@ -832,6 +831,8 @@ body {
     text-align: center;
     color: #E8E3E8;
     transition: opacity 2.0s ease-in-out;
+    width: 100%;
+    /* Ensure stages don't overflow */
 }
 
 /* Stage A: Meaning - Slightly elevated center */
@@ -839,10 +840,9 @@ body {
     z-index: 2;
     opacity: 1;
     justify-content: center;
-    padding-bottom: 15vh;
-    /* Visual center lift */
-    gap: 5vh;
-    /* Airy spacing */
+    padding-bottom: 20vh;
+    /* Lifted higher for visual balance */
+    gap: 4vh;
 }
 
 /* Stage B: Contact - Top-down flow */
@@ -851,8 +851,7 @@ body {
     opacity: 0;
     pointer-events: none;
     justify-content: flex-start;
-    padding-top: 25vh;
-    /* Starts at ~25% from top */
+    padding-top: 22vh;
     gap: 3vh;
 }
 
@@ -868,57 +867,67 @@ body {
     transition: opacity 2.5s ease-out, transform 2.5s ease-out;
 }
 
-/* --- Typography Styles --- */
+/* --- Typography Styles (Responsiveness Fix) --- */
 
-/* 1. Logo (Stage B) - Subtle Presence */
+/* 1. Logo (Stage B) */
 .final-logo {
-    width: 100px;
+    width: 90px;
+    /* Safe size */
+    max-width: 25vw;
+    /* Prevent giant logo on tiny screens */
     height: auto;
     filter: drop-shadow(0 0 20px rgba(233, 213, 255, 0.15));
-    margin-bottom: 10vh;
-    /* Separation from contact */
+    margin-bottom: 8vh;
 }
 
-/* 2. Primary Line (Stage A) - Elevated */
+/* 2. Primary Line (Stage A) */
 .final-line-1 {
     font-family: var(--font-heading);
-    font-size: clamp(1.8rem, 4vh, 2.6rem);
+    /* Scale with WIDTH (vw) to prevent overflow on narrow screens */
+    font-size: clamp(1.6rem, 8vw, 2.6rem);
     font-weight: 300;
     line-height: 1.1;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
+    /* Tighter tracking for safe fit */
     color: #FFF5E1;
     transition-delay: 1.0s;
+    width: 100%;
+    overflow-wrap: break-word;
+    /* Safety wrap */
 }
 
 /* 3. Supporting Line (Stage A) */
 .final-line-2 {
     font-family: var(--font-heading);
-    font-size: clamp(1.1rem, 2.2vh, 1.4rem);
+    font-size: clamp(1.0rem, 4.5vw, 1.4rem);
     font-style: italic;
     opacity: 0.85;
     margin-bottom: 2vh;
     transition-delay: 4.0s;
+    width: 100%;
+    overflow-wrap: break-word;
 }
 
 /* 4. Description (Stage A) */
 .final-line-3 {
     font-family: var(--font-body);
-    font-size: clamp(0.85rem, 1.8vh, 1rem);
-    line-height: 2.0;
+    font-size: clamp(0.75rem, 3.5vw, 1rem);
+    /* Smaller min size for mobile */
+    line-height: 1.8;
     letter-spacing: 0.05em;
     opacity: 0.75;
-    max-width: 35ch;
+    max-width: 90%;
+    /* Strict width constraint */
     margin-bottom: auto;
     transition-delay: 7.0s;
 }
 
-/* 5. Contact (Stage B) - Clean Column */
+/* 5. Contact (Stage B) */
 .final-contact {
     font-family: var(--font-accent);
-    font-size: clamp(0.9rem, 1.8vh, 1.1rem);
+    font-size: clamp(0.8rem, 3.5vw, 1.1rem);
     letter-spacing: 0.1em;
     line-height: 2.2;
-    /* Open rhythm */
     opacity: 0.9;
     display: flex;
     flex-direction: column;
@@ -929,7 +938,7 @@ body {
     font-weight: 400;
     color: #FFF;
     margin-bottom: 1vh;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
 }
 
 .contact-detail {
