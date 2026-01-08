@@ -67,7 +67,27 @@
 
     <!-- Act 2: The Door -->
     <section id="act2" class="act2" aria-label="De Deur">
-        <!-- Act 2 content will go here -->
+        <!-- Layer 1: The Open Door (Destination) -->
+        <div class="act2__open"></div>
+
+        <!-- Layer 1.5: Invitation Gesture (Video) -->
+        <div class="act2__invitation">
+            <video id="invitation-video" playsinline muted preload="auto">
+                <source src="assets/act2_inviting_hand_FINAL.mp4.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Layer 2: The Closed Door (Initial State) -->
+        <div class="act2__closed"></div>
+
+        <!-- Layer 3: Narrative Transitions (POV Light & Final State) -->
+        <div class="act2__fill-light"></div>
+        <div class="act2__charcoal-overlay">
+            <div class="final-message">
+                <h2 class="final-message__title">Iris</h2>
+                <p class="final-message__subtitle">Website Under Construction</p>
+            </div>
+        </div>
     </section>
 
     <!-- Accent text reveal animation -->

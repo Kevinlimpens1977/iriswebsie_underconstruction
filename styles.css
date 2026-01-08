@@ -700,6 +700,7 @@ body {
 }
 
 /* Act 2 Container (Door Scene) */
+/* Act 2 Container (Door Scene) */
 .act2 {
     /* Always present and visible, initially behind ACT 1 */
     position: fixed;
@@ -710,14 +711,151 @@ body {
     opacity: 1;
     visibility: visible;
 
-    background-image: url('assets/deurdicht.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     background-color: var(--color-dark-night);
 
     /* GPU acceleration */
-    will-change: opacity, filter;
+    will-change: opacity, filter, transform;
+    /* Phase 6: POV Entry (Slower: 6.5s for gentle pull) */
+    transition: transform 6.5s cubic-bezier(0.3, 0.0, 0.7, 1), filter 6.5s ease-in;
+}
+
+/* POV Entry State (Light fills the frame) */
+.act2.pov-entry {
+    /* Huge scale to simulate passing through */
+    transform: scale(9.0);
+}
+
+/* Act 2B: Warm Light Fill - Intensified */
+.act2__fill-light {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    /* Intense, enveloping interior light (White-Gold center) */
+    background: radial-gradient(circle at center, #FFFFFF 0%, #FFF0D0 40%, #FFDFA0 100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 6.5s ease-in;
+    /* Syncs with POV */
+}
+
+.act2.pov-entry .act2__fill-light {
+    opacity: 1;
+    /* Envelope screen in light */
+}
+
+/* Act 2C: Charcoal Resolution - Calmer Transition */
+.act2__charcoal-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    /* Refined charcoal / deep blue final state */
+    background-color: #1A1F2B;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 3.0s ease-in-out;
+}
+
+.act2.resolve-charcoal .act2__charcoal-overlay {
+    opacity: 1;
+}
+
+/* Final Message Typography - Appears AFTER color settles */
+.final-message {
+    text-align: center;
+    color: var(--color-off-white);
+    transform: translateY(20px);
+    opacity: 0;
+    /* Delay 2.5s after charcoal starts fading in */
+    transition: opacity 2.0s ease-out 2.5s, transform 2.0s ease-out 2.5s;
+}
+
+.act2.resolve-charcoal .final-message {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.final-message__title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+    margin-bottom: var(--space-xs);
+    color: var(--color-gold);
+}
+
+.final-message__subtitle {
+    font-family: var(--font-accent);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* ACT 2 Layers */
+.act2__open,
+.act2__closed {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 6s ease-out;
+    /* Subtle scale effect support */
+}
+
+.act2__open {
+    z-index: 1;
+    background-image: url('assets/deuropen.jpg');
+    /* Slight zoom out for depth */
+    transform: scale(1.05);
+}
+
+.act2__closed {
+    z-index: 2;
+    background-image: url('assets/deurdicht.jpg');
+    will-change: opacity;
+}
+
+/* Invitation Gesture (Video Layer) */
+.act2__invitation {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    /* Sits with open door, behind closed door */
+    opacity: 0;
+    /* Hidden until triggered */
+    transition: opacity 0.5s ease-out;
+    pointer-events: none;
+}
+
+.act2__invitation video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.act2__invitation.active {
+    opacity: 1;
+}
+
+/* Door Opening Animation
+   Simulates door opening by dissolving the closed layer
+   Duration: 3s (part of the 3.5s sequence)
+*/
+.act2__closed.opening {
+    animation: door-open-dissolve 3.0s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+@keyframes door-open-dissolve {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 /* Door Reveal Animation - PHASE 3 ONLY

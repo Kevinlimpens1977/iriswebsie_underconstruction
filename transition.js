@@ -116,6 +116,53 @@ document.addEventListener('DOMContentLoaded', () => {
             // Ensure Act 2 remains fully visible after animation class removal
             act2.style.opacity = '1';
         }, 11000);
+
+        // T+11.5s: ACT 2 - DOOR OPENING SEQUENCE
+        // 0.5s Hold (11.0-11.5) -> Open (11.5-14.5)
+        setTimeout(() => {
+            const doorClosedLayer = document.querySelector('.act2__closed');
+            if (doorClosedLayer) {
+                doorClosedLayer.classList.add('opening');
+            }
+        }, 11500);
+
+        // T+14.5s: ACT 2A - INVITATION GESTURE
+        // Door is open. Hand gesture plays.
+        setTimeout(() => {
+            const inviteLayer = document.querySelector('.act2__invitation');
+            const inviteVideo = document.getElementById('invitation-video');
+
+            if (inviteLayer && inviteVideo) {
+                inviteLayer.classList.add('active');
+
+                // Play video and chain ACT 2B
+                inviteVideo.play().then(() => {
+                    // When gesture completes
+                    // When gesture completes (T+19.5s approx)
+                    inviteVideo.onended = () => {
+                        // Phase 5: Withdrawal (Hand fades into darkness)
+                        // "Hand must be completely gone BEFORE POV begins"
+                        inviteLayer.style.transition = 'opacity 1.5s ease-in-out';
+                        inviteLayer.classList.remove('active');
+
+                        // Phase 6: Hold & Enter
+                        // Wait 1.5s (fade) + 0.3s (stillness) = 1.8s
+                        setTimeout(() => {
+                            // POV Entry: Move through the doorway (5.0s duration)
+                            // Triggers scale(8.0) and light fill opacity
+                            act2.classList.add('pov-entry');
+
+                            // Phase 7: Resolution (Charcoal + Message)
+                            // Triggered after POV completes
+                            setTimeout(() => {
+                                act2.classList.add('resolve-charcoal');
+                            }, 6500);
+
+                        }, 1800);
+                    };
+                }).catch(e => console.warn('Invitation video play failed:', e));
+            }
+        }, 14500);
     };
 
     /**
