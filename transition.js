@@ -152,11 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Triggers scale(8.0) and light fill opacity
                             act2.classList.add('pov-entry');
 
-                            // Phase 7: Resolution (Charcoal + Message)
+                            // Phase 7: Resolution (Deep Purple + Message)
                             // Triggered after POV completes
                             setTimeout(() => {
                                 act2.classList.add('resolve-charcoal');
-                            }, 10000);
+                            }, 12000);
 
                         }, 1800);
                     };

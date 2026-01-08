@@ -715,41 +715,42 @@ body {
 
     /* GPU acceleration */
     will-change: opacity, filter, transform;
-    /* Phase 6: POV Entry (Much Slower: 10.0s for gentle glide) */
-    transition: transform 10.0s cubic-bezier(0.25, 0.0, 0.75, 1), filter 10.0s ease-in;
+    /* Phase 6: POV Entry (Extremely Slow Drift: 12.0s) */
+    transition: transform 12.0s cubic-bezier(0.2, 0.0, 0.8, 1), filter 12.0s ease-in;
 }
 
-/* POV Entry State (Light fills the frame) */
+/* POV Entry State (Drifting into light, not passing through) */
 .act2.pov-entry {
-    /* Huge scale to simulate passing through */
-    transform: scale(9.0);
+    /* Subtle scale (3.0) to drift towards door without reaching it */
+    transform: scale(3.0);
 }
 
-/* Act 2B: Warm Light Fill - Interior Tone Sync */
+/* Act 2B: Purple Light Fill - Interior Source */
 .act2__fill-light {
     position: absolute;
     inset: 0;
     z-index: 10;
-    /* Enveloping interior light (Warm Gold/Cognac tones) */
-    background: radial-gradient(circle at center, #FFF5E1 0%, #EDC967 40%, #935430 100%);
+    /* Intense Interior Purple Light (Source -> Deep) */
+    /* Light Lavender -> Vivid Purple -> Deep Violet */
+    background: radial-gradient(circle at center, #E9D5FF 0%, #9333EA 40%, #581C87 100%);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 10.0s ease-in;
+    transition: opacity 12.0s ease-in;
     /* Syncs with POV */
 }
 
 .act2.pov-entry .act2__fill-light {
     opacity: 1;
-    /* Envelope screen in interior light */
+    /* Envelope screen in purple light */
 }
 
-/* Act 2C: Charcoal Resolution - Calmer Transition */
+/* Act 2C: Deep Purple Resolution */
 .act2__charcoal-overlay {
     position: absolute;
     inset: 0;
     z-index: 20;
-    /* Refined charcoal / deep blue final state */
-    background-color: #1A1F2B;
+    /* Final State: Deep Dark Purple */
+    background-color: #180828;
     opacity: 0;
     display: flex;
     align-items: center;

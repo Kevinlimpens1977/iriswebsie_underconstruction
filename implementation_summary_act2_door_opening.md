@@ -1,8 +1,8 @@
 # ACT 2 - Door Opening, Invitation & Entry Implementation
 
-## ✅ Status: Implemented & Refined (Final Regie)
+## ✅ Status: Implemented & Refined (Final Transition: Purple Drift)
 
-The full Act 2 cinematic sequence is complete, featuring a slow, synchronized 10-second entry into warm light.
+The full Act 2 cinematic sequence is complete. The viewer is never forced through the door but is instead dissolved into the interior purple light.
 
 ---
 
@@ -26,40 +26,38 @@ The full Act 2 cinematic sequence is complete, featuring a slow, synchronized 10
 ### **Phase 5: The Withdrawal (T+19.5s – T+21.0s)**
 - **Trigger**: Video Ends.
 - **Action**: Hand fades into darkness (1.5s).
-- **Narrative**: The guide steps back.
 
 ### **Phase 6: The Pause (T+21.0s – T+21.3s)**
 - **Duration**: 0.3 seconds.
-- **Action**: Empty doorway holds. The path is clear.
+- **Action**: Empty doorway holds.
 
-### **Phase 7: POV Entry (T+21.3s – T+31.3s)**
-- **Duration**: **10.0 seconds** (Gentle Glide).
-- **Action**: Viewer moves through the doorway.
+### **Phase 7: POV Drift (T+21.3s – T+33.3s)**
+- **Duration**: **12.0 seconds** (Extremely Slow Drift).
+- **Movement**: `scale(3.0)` (Subtle forward drift).
+- **Effect**: The viewer drifts towards the light but is absorbed before reaching the threshold.
 - **Visual**:
-  - `transform: scale(9.0)` pulls camera deep into the room.
-  - `act2__fill-light` fades in (Warm Interior Gold: `#FFF5E1` -> `#EDC967` -> `#935430`).
-  - Screen becomes enveloped in warm light, synced exactly with forward movement.
+  - `act2__fill-light` fades in (Purples: `#E9D5FF` -> `#9333EA` -> `#581C87`).
+  - Screen becomes enveloped in intense interior purple light.
 
-### **Phase 8: Resolution (T+31.3s+)**
-- **Action**: Light transitions to calm structure.
+### **Phase 8: Resolution (T+33.3s+)**
+- **Action**: Light transitions to Deep Dark Purple structure.
 - **Visual**:
-  - `act2__charcoal-overlay` fades in over 4.0s (Refined dark blue/charcoal).
+  - `act2__charcoal-overlay` fades in over 4.0s (Deep Dark Purple `#180828`).
   - Final message "Iris — Website Under Construction" fades in **after** color settles (4.0s delay).
-- **Feel**: Immersive, intentional, reassuring.
+- **End State**: A calm, premium, deep purple field.
 
 ---
 
 ## 🔧 Technical Structures
 
 ### **Layer Stack**
-1.  **.act2__open** (Z:1) - Background
-2.  **.act2__invitation** (Z:1) - Video Overlay
-3.  **.act2__closed** (Z:2) - Initial Door (Fades out)
-4.  **.act2__fill-light** (Z:10) - Warm POV Glow (Fades in)
-5.  **.act2__charcoal-overlay** (Z:20) - Final Background
+1.  **.act2__open** (Z:1)
+2.  **.act2__invitation** (Z:1)
+3.  **.act2__closed** (Z:2)
+4.  **.act2__fill-light** (Z:10) - Purple Gradient
+5.  **.act2__charcoal-overlay** (Z:20) - Deep Purple Background
 6.  **.final-message** (Inside Z:20) - Typography
 
 ### **Key Logic**
-- Hand withdrawal logic strictly sequenced via `onended` + `setTimeout(1800)`.
-- POV duration matches Light Fill transition (10s).
-- Resolution logic chained 10s after POV start.
+- POV duration extended to 12s.
+- Resolution logic chained 12s after POV start.
