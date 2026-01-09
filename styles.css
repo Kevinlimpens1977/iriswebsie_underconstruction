@@ -127,15 +127,18 @@ body {
     background-color: var(--color-dark-night);
 }
 
-/* Dark Overlay for Text Readability - Deep Violet grading */
+/* Dark Overlay for Text Readability - Contrast Pocket in Center */
 .hero__overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
+    /* Darker in center (text area), lighter toward bottom */
     background: linear-gradient(180deg,
-            rgba(15, 5, 25, 0.3) 0%,
-            rgba(15, 5, 25, 0.6) 50%,
-            rgba(10, 0, 15, 0.8) 100%);
+            rgba(15, 5, 25, 0.4) 0%,
+            rgba(10, 0, 20, 0.7) 35%,
+            rgba(10, 0, 20, 0.65) 50%,
+            rgba(15, 5, 25, 0.4) 75%,
+            rgba(10, 0, 15, 0.3) 100%);
 }
 
 /* Symbol Mark — Ghostly dark purple wandering presence */
@@ -253,15 +256,20 @@ body {
 }
 
 /* Portal/Door Layer — Atmospheric depth layer (FINAL) */
+/* CONSTRAINED TO LOWER 40% OF SCREEN */
 .hero__portal-layer {
     position: absolute;
     inset: 0;
     z-index: 3;
     pointer-events: none;
 
-    /* Mobile/Tablet: subtle atmospheric presence (Reduced) */
-    opacity: 0.04;
+    /* Mobile/Tablet: subtle atmospheric presence */
+    opacity: 0.08;
     visibility: visible;
+
+    /* Smoke mask: visible only in bottom 40%, soft fade */
+    mask-image: linear-gradient(to top, black 0%, black 35%, transparent 60%);
+    -webkit-mask-image: linear-gradient(to top, black 0%, black 35%, transparent 60%);
 }
 
 /* Portal layer video element */
@@ -309,50 +317,50 @@ body {
     }
 }
 
-/* Content Container */
+/* Content Container — Positioned in Upper-Middle Third */
 .hero__content {
-    position: relative;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 10;
     text-align: center;
-    padding: var(--space-lg);
-    max-width: 90%;
-
-    /* Upward shift for focal alignment (lamp area) */
-    transform: translateY(-15vh);
+    /* Minimal horizontal padding to maximize title space */
+    padding: var(--space-md) 2vw;
+    /* Allow content to use nearly full width on mobile */
+    max-width: 96%;
+    width: 100%;
 }
 
-/* Headline — grounded, authoritative, ritual-like */
+/* Headline — ALWAYS SINGLE LINE */
 .hero__headline {
     font-family: var(--font-heading);
-    /* Increased authority and contrast */
     font-weight: 700;
-    font-size: clamp(2.2rem, 9vw, 4.2rem);
-    letter-spacing: 0.08em;
+    /* Responsive: reduced scaling to prevent overflow */
+    font-size: clamp(1.5rem, 7vw, 3.5rem);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--color-off-white);
+    /* Warm bright off-white for readability */
+    color: #F5F0F5;
 
-    /* Move subtitle closer */
+    /* FORCE SINGLE LINE — no wrapping */
+    white-space: nowrap;
+
     margin-bottom: var(--space-xs);
-
-    /* Stronger depth */
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 }
 
 /* Subline — quieter echo of the headline */
 .hero__subline {
     font-family: var(--font-heading);
     font-weight: 400;
-    font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+    font-size: clamp(0.85rem, 3.2vw, 1.25rem);
     letter-spacing: 0.08em;
-    color: var(--color-off-white);
-
-    /* Increased readability/contrast */
-    opacity: 0.9;
-
-    /* Single line constraint */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* Warm bright off-white */
+    color: #F5F0F5;
+    /* Increased readability */
+    opacity: 0.85;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Accent text — warm, secondary, suggestive */
@@ -363,23 +371,97 @@ body {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-gold);
-    opacity: 0.75;
+    /* Increased visibility */
+    opacity: 0.80;
     margin-top: var(--space-lg);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Letter-by-letter reveal — controlled by JavaScript for looping */
+/* Magnifying Wave Animation — "BINNENKORT…" */
+@keyframes magnify-wave {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+}
+
+/* Letter styling — always visible, wave animation */
 .hero__accent .char {
-    opacity: 0;
-    transition: opacity 0.4s ease-out;
+    display: inline-block;
+    opacity: 1;
+    animation: magnify-wave 2.8s ease-in-out infinite;
 }
 
-.hero__accent .char.visible {
-    opacity: 1;
+/* Staggered delays for wave effect (left to right) */
+.hero__accent .char:nth-child(1) {
+    animation-delay: 0.00s;
+}
+
+.hero__accent .char:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.hero__accent .char:nth-child(3) {
+    animation-delay: 0.24s;
+}
+
+.hero__accent .char:nth-child(4) {
+    animation-delay: 0.36s;
+}
+
+.hero__accent .char:nth-child(5) {
+    animation-delay: 0.48s;
+}
+
+.hero__accent .char:nth-child(6) {
+    animation-delay: 0.60s;
+}
+
+.hero__accent .char:nth-child(7) {
+    animation-delay: 0.72s;
+}
+
+.hero__accent .char:nth-child(8) {
+    animation-delay: 0.84s;
+}
+
+.hero__accent .char:nth-child(9) {
+    animation-delay: 0.96s;
+}
+
+.hero__accent .char:nth-child(10) {
+    animation-delay: 1.08s;
+}
+
+.hero__accent .char:nth-child(11) {
+    animation-delay: 1.20s;
+}
+
+.hero__accent .char:nth-child(12) {
+    animation-delay: 1.32s;
+}
+
+.hero__accent .char:nth-child(13) {
+    animation-delay: 1.44s;
 }
 
 /* Static fallback when JS is disabled */
 .no-js .hero__accent .char {
+    animation: none;
     opacity: 1;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .hero__accent .char {
+        animation: none;
+        opacity: 1;
+    }
 }
 
 /* --------------------------------------------------------------------------
@@ -387,7 +469,7 @@ body {
    -------------------------------------------------------------------------- */
 @media (min-width: 768px) {
     .hero__content {
-        max-width: 70%;
+        max-width: 90%;
         padding: var(--space-xl);
     }
 
@@ -397,6 +479,23 @@ body {
 
     .hero__subline {
         letter-spacing: 0.15em;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Tablet-Specific Overrides (768px – 1024px) — iPad / iPad Pro Portrait
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hero__content {
+        /* Increase breathing room for wider tablet viewports */
+        padding: var(--space-md) 5vw;
+    }
+
+    .hero__headline {
+        /* Constrained scaling for tablet range */
+        font-size: clamp(2rem, 6vw, 3.2rem);
+        /* Single-line enforcement preserved */
+        white-space: nowrap;
     }
 }
 
@@ -420,11 +519,11 @@ body {
     }
 
     .hero__content {
-        max-width: 60%;
+        max-width: 80%;
     }
 
     .hero__headline {
-        letter-spacing: 0.25em;
+        letter-spacing: 0.15em;
     }
 
     /* Desktop-only atmospheric layer (Reduced) */
@@ -439,7 +538,7 @@ body {
    -------------------------------------------------------------------------- */
 @media (min-width: 1440px) {
     .hero__content {
-        max-width: 50%;
+        max-width: 70%;
     }
 }
 
@@ -495,26 +594,41 @@ body {
 /* --------------------------------------------------------------------------
    Act 1 CTA & Transition Layers
    -------------------------------------------------------------------------- */
+/* CTA — GOLD LUXURY STYLE */
+/* .hero__content is at top: 35%, CTA at top: 25% = always above */
 .act1-cta {
     position: absolute;
-    /* Repositioned to tension zone (approx 55% height, lampshade area) */
-    top: 55vh;
+    /* ABOVE .hero__content — strictly never overlapping */
+    top: 25%;
     bottom: auto;
     left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
+    transform: translate(-50%, -50%);
+    /* Above all layers */
+    z-index: 250;
     width: 100%;
     max-width: 600px;
-    padding: 0 var(--space-md);
+    padding: 12px 24px;
+    min-height: 44px;
 
-    font-family: var(--font-heading);
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
-    color: var(--color-off-white);
+    /* Typography: authoritative, clear */
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-align: center;
-    letter-spacing: 0.05em;
+
+    /* Color: Champagne Gold */
+    color: #E8D088;
+
+    /* Gold spray glow — sharp core, soft halo */
+    text-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.85),
+        0 0 10px rgba(230, 200, 120, 0.5),
+        0 0 22px rgba(200, 160, 90, 0.35);
 
     opacity: 0;
-    transition: opacity 1.5s ease-out, text-shadow 0.3s ease;
+    transition: opacity 1.5s ease-out;
+    /* Clickable when visible (controlled by .visible/.interactive classes) */
     pointer-events: none;
 }
 
@@ -753,6 +867,402 @@ body {
     /* Subtle scale (3.0) to drift towards door without reaching it */
     transform: scale(3.0);
 }
+
+/* --------------------------------------------------------------------------
+   ACT 2 THRESHOLD ZONE — Sustained Interaction
+   -------------------------------------------------------------------------- */
+/* The threshold is the user's commitment point. 
+   They must hold to cross. The experience responds to their intention. */
+
+.act2__threshold {
+    position: absolute;
+    /* Centered in the door opening area */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    z-index: 15;
+
+    /* Initially hidden, appears after door opens */
+    opacity: 0;
+    pointer-events: none;
+
+    /* Touch/click target */
+    cursor: pointer;
+
+    transition: opacity 1.5s ease-out;
+}
+
+/* Threshold becomes active after door fully opens */
+.act2.threshold-ready .act2__threshold {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --------------------------------------------------------------------------
+   GHOSTLY VISOR POINTER — Visual guidance (not a button)
+   -------------------------------------------------------------------------- */
+.threshold__pointer {
+    position: absolute;
+    /* Hovering directly above container (gap ~27% of original) */
+    bottom: 18.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+
+    /* Arrow shape via border technique */
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-top: 24px solid rgba(255, 250, 245, 0.55);
+
+    /* Soft glow edges */
+    filter: drop-shadow(0 0 10px rgba(232, 208, 136, 0.5)) drop-shadow(0 0 25px rgba(255, 250, 245, 0.25));
+
+    /* Breathing animation (~2.4s cycle) */
+    animation: visor-breathe 2.4s linear infinite;
+}
+
+@keyframes visor-breathe {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        opacity: 0.7;
+        /* Breathe DOWN toward container (12px range) */
+        transform: translateX(-50%) translateY(12px);
+    }
+}
+
+/* Hide pointer on first interaction */
+.act2__threshold.interacted .threshold__pointer {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+    pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   INVITATION TEXT CONTAINER — Luxurious, not clickable
+   -------------------------------------------------------------------------- */
+.act2__invitation-text {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 16;
+
+    /* Container styling */
+    border: 1px solid rgba(232, 208, 136, 0.35);
+    background: rgba(20, 10, 30, 0.6);
+    border-radius: 8px;
+    box-shadow: inset 0 0 15px rgba(232, 208, 136, 0.08);
+    padding: 12px 24px;
+
+    /* Typography — gold, readable */
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: #E8D088;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    text-align: center;
+
+    /* NO hover, NO cursor pointer — not a button */
+    cursor: default;
+
+    /* Initially hidden */
+    opacity: 0;
+    transition: opacity 1.5s ease-out;
+}
+
+/* Show text when threshold is ready */
+.act2.threshold-ready .act2__invitation-text {
+    opacity: 1;
+}
+
+/* Fade text on first interaction */
+.act2.threshold-interacted .act2__invitation-text {
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+/* Hide text after crossing */
+.act2.threshold-crossed .act2__invitation-text {
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+   ENERGY RELEASE — Diffuse light masses from door seam
+   NOT particles, NOT dots, NOT symmetrical
+   -------------------------------------------------------------------------- */
+.energy-release {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+    /* LAYERING: Above dark overlays, below UI text */
+    z-index: 25;
+}
+
+.energy-mass {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    pointer-events: none;
+
+    /* Diffuse, irregular shapes via border-radius */
+    border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+
+    /* INTENSIFIED gradient (~2.5x) with bright KERNEL core */
+    background: radial-gradient(ellipse at center,
+            rgba(255, 235, 180, 0.95) 0%,
+            rgba(245, 220, 150, 0.7) 15%,
+            rgba(232, 208, 136, 0.45) 40%,
+            rgba(232, 208, 136, 0.15) 70%,
+            transparent 100%);
+
+    /* Bright core glow — pressure point */
+    box-shadow:
+        0 0 30px rgba(255, 235, 180, 0.6),
+        0 0 60px rgba(232, 208, 136, 0.4);
+
+    /* Reduced blur for more presence, still soft */
+    filter: blur(25px);
+}
+
+/* Trigger on .threshold-clicked */
+.act2.threshold-clicked .energy-mass {
+    animation-fill-mode: forwards;
+}
+
+/* Each mass: unique size, position, timing, motion */
+/* Mass 1: Large, slow, drifts up-left then contracts inward */
+.energy-mass:nth-child(1) {
+    width: 120px;
+    height: 90px;
+    transform: translate(-50%, -50%) translate(-15px, 10px);
+}
+
+.act2.threshold-clicked .energy-mass:nth-child(1) {
+    animation: energy-drift-1 2.4s ease-out forwards;
+}
+
+@keyframes energy-drift-1 {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(-15px, 10px) scale(0.6);
+    }
+
+    15% {
+        /* PEAK — eye catches immediately */
+        opacity: 1;
+        transform: translate(-50%, -50%) translate(-20px, 0px) scale(1.15);
+    }
+
+    40% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) translate(-25px, -10px) scale(1.05);
+    }
+
+    70% {
+        opacity: 0.25;
+        transform: translate(-50%, -50%) translate(-15px, 10px) scale(0.7);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(-5px, 25px) scale(0.3);
+    }
+}
+
+/* Mass 2: Medium, faster, drifts right then pulls center */
+.energy-mass:nth-child(2) {
+    width: 80px;
+    height: 60px;
+    border-radius: 55% 45% 50% 50% / 45% 55% 45% 55%;
+    transform: translate(-50%, -50%) translate(20px, -5px);
+}
+
+.act2.threshold-clicked .energy-mass:nth-child(2) {
+    animation: energy-drift-2 2.2s ease-out 0.1s forwards;
+}
+
+@keyframes energy-drift-2 {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(20px, -5px) scale(0.5);
+    }
+
+    15% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) translate(30px, 5px) scale(1.1);
+    }
+
+    40% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) translate(35px, 10px) scale(1);
+    }
+
+    70% {
+        opacity: 0.2;
+        transform: translate(-50%, -50%) translate(25px, 15px) scale(0.6);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(10px, 20px) scale(0.2);
+    }
+}
+
+/* Mass 3: Small, quick, low and center */
+.energy-mass:nth-child(3) {
+    width: 50px;
+    height: 40px;
+    border-radius: 50% 50% 40% 60% / 55% 45% 55% 45%;
+    transform: translate(-50%, -50%) translate(0, 25px);
+}
+
+.act2.threshold-clicked .energy-mass:nth-child(3) {
+    animation: energy-drift-3 2.0s ease-out 0.15s forwards;
+}
+
+@keyframes energy-drift-3 {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(0, 25px) scale(0.7);
+    }
+
+    18% {
+        opacity: 0.85;
+        transform: translate(-50%, -50%) translate(2px, 28px) scale(1.1);
+    }
+
+    45% {
+        opacity: 0.45;
+        transform: translate(-50%, -50%) translate(3px, 32px) scale(1);
+    }
+
+    75% {
+        opacity: 0.15;
+        transform: translate(-50%, -50%) translate(4px, 36px) scale(0.7);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(5px, 40px) scale(0.4);
+    }
+}
+
+/* Mass 4: Wide, slow expansion then inward pull */
+.energy-mass:nth-child(4) {
+    width: 100px;
+    height: 50px;
+    border-radius: 60% 40% 45% 55% / 40% 60% 50% 50%;
+    transform: translate(-50%, -50%) translate(-30px, -20px);
+}
+
+.act2.threshold-clicked .energy-mass:nth-child(4) {
+    animation: energy-drift-4 2.3s ease-out 0.05s forwards;
+}
+
+@keyframes energy-drift-4 {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(-30px, -20px) scale(0.5);
+    }
+
+    12% {
+        opacity: 0.85;
+        transform: translate(-50%, -50%) translate(-38px, -15px) scale(1.1);
+    }
+
+    35% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) translate(-45px, -10px) scale(1.05);
+    }
+
+    65% {
+        opacity: 0.2;
+        transform: translate(-50%, -50%) translate(-25px, 5px) scale(0.7);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(-10px, 15px) scale(0.25);
+    }
+}
+
+/* Mass 5: Subtle, asymmetric, upper right */
+.energy-mass:nth-child(5) {
+    width: 60px;
+    height: 45px;
+    border-radius: 45% 55% 60% 40% / 50% 50% 40% 60%;
+    transform: translate(-50%, -50%) translate(25px, -30px);
+}
+
+.act2.threshold-clicked .energy-mass:nth-child(5) {
+    animation: energy-drift-5 2.1s ease-out 0.12s forwards;
+}
+
+@keyframes energy-drift-5 {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(25px, -30px) scale(0.6);
+    }
+
+    20% {
+        opacity: 0.75;
+        transform: translate(-50%, -50%) translate(22px, -25px) scale(1);
+    }
+
+    45% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) translate(18px, -15px) scale(0.9);
+    }
+
+    75% {
+        opacity: 0.12;
+        transform: translate(-50%, -50%) translate(12px, 0px) scale(0.6);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(8px, 10px) scale(0.3);
+    }
+}
+
+/* Completed state — threshold fades, transition begins */
+.act2__threshold.complete {
+    animation: threshold-complete 0.6s ease-out forwards;
+}
+
+@keyframes threshold-complete {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Hide threshold after crossing */
+.act2.threshold-crossed .act2__threshold {
+    display: none;
+}
+
 
 /* Act 2B: Purple Light Fill - Interior Source */
 .act2__fill-light {
@@ -1156,5 +1666,186 @@ body {
 
     100% {
         opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   ACT FINAL — ARRIVAL
+   The destination. Calm, professional, warm.
+   
+   CRITICAL: All text must ALWAYS be reachable via scroll.
+   No overflow:hidden, no fixed heights, no clipping.
+   ========================================================================== */
+
+.act-final {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+
+    /* Box model */
+    box-sizing: border-box;
+
+    /* Safe horizontal padding */
+    padding: 0 1rem;
+
+    /* SCROLLABLE container — NOT flex centered */
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Allow internal scroll */
+    -webkit-overflow-scrolling: touch;
+
+    /* Slightly lighter center glow behind content */
+    background: radial-gradient(ellipse at center,
+            rgba(40, 25, 60, 0.4) 0%,
+            transparent 60%);
+
+    /* Soft fade-in */
+    opacity: 0;
+    transition: opacity 1.4s ease-out;
+}
+
+/* Show ACT FINAL when charcoal overlay resolves */
+.act2.resolve-charcoal .act-final {
+    opacity: 1;
+}
+
+/* Container — uses margin auto for centering, NOT flexbox */
+.act-final__container {
+    /* Box model */
+    box-sizing: border-box;
+
+    /* Centering via margin */
+    margin: 5vh auto;
+    padding: 2rem 1.5rem;
+
+    /* Width constraints — stay within viewport */
+    width: calc(100% - 2rem);
+    max-width: 560px;
+
+    /* NO height constraints — content determines height */
+
+    /* Content layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+
+    /* Ensure minimum breathing room at bottom */
+    padding-bottom: 3rem;
+
+    /* Prevent text overflow */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Heading */
+.act-final__heading {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    color: #F5F0F5;
+    margin: 0;
+}
+
+/* Core Text */
+.act-final__core {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(245, 240, 245, 0.85);
+}
+
+.act-final__core p {
+    margin: 0;
+}
+
+/* Explanation */
+.act-final__explanation {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(245, 240, 245, 0.75);
+    max-width: 480px;
+}
+
+.act-final__explanation p {
+    margin: 0 0 0.8rem 0;
+}
+
+.act-final__explanation p:last-child {
+    margin-bottom: 0;
+}
+
+/* Anchoring Sentence — gold accent */
+.act-final__anchor {
+    font-family: var(--font-heading);
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    color: #E8D088;
+    text-shadow: 0 0 20px rgba(232, 208, 136, 0.2);
+    margin: 0.5rem 0;
+}
+
+/* Contact — plain text, no button styling */
+.act-final__contact {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    font-weight: 400;
+    line-height: 1.8;
+    color: rgba(245, 240, 245, 0.9);
+}
+
+.act-final__contact p {
+    margin: 0.25rem 0;
+}
+
+/* Links styled as plain text */
+.act-final__contact a {
+    color: inherit;
+    text-decoration: none;
+    cursor: text;
+    border: none;
+    background: none;
+}
+
+/* NO hover effects on contact links */
+.act-final__contact a:hover,
+.act-final__contact a:focus {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+}
+
+/* Website Status — small, subtle */
+.act-final__status {
+    font-family: var(--font-body);
+    font-size: clamp(0.7rem, 1.6vw, 0.8rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(245, 240, 245, 0.45);
+    margin-top: 1rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .act-final__container {
+        margin: 3vh auto;
+        padding: 2rem 1.25rem 3rem;
+        gap: 1.25rem;
+    }
+
+    .act-final__heading {
+        font-size: 1.6rem;
+    }
+
+    .act-final__anchor {
+        font-style: normal;
     }
 }

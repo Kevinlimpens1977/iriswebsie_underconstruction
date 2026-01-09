@@ -135,43 +135,90 @@ document.addEventListener('DOMContentLoaded', () => {
             if (inviteLayer && inviteVideo) {
                 inviteLayer.classList.add('active');
 
-                // Play video and chain ACT 2B
+                // Play video
                 inviteVideo.play().then(() => {
-                    // When gesture completes
-                    // When gesture completes (T+19.5s approx)
+                    // When gesture completes, show threshold
                     inviteVideo.onended = () => {
-                        // Phase 5: Withdrawal (Hand fades into darkness)
-                        // "Hand must be completely gone BEFORE POV begins"
+                        // Fade out hand
                         inviteLayer.style.transition = 'opacity 1.5s ease-in-out';
                         inviteLayer.classList.remove('active');
 
-                        // Phase 6: Hold & Enter
-                        // Wait 1.5s (fade) + 0.3s (stillness) = 1.8s
+                        // After hand fades, reveal threshold
                         setTimeout(() => {
-                            // POV Entry: Move through the doorway (5.0s duration)
-                            // Triggers scale(8.0) and light fill opacity
-                            act2.classList.add('pov-entry');
+                            // Make threshold interactable
+                            act2.classList.add('threshold-ready');
 
-                            // Phase 7: Resolution (Deep Purple + Message)
-                            // Triggered after POV completes
-                            setTimeout(() => {
-                                act2.classList.add('resolve-charcoal');
-                                // Trigger breathing background
-                                const overlay = act2.querySelector('.act2__charcoal-overlay');
-                                if (overlay) overlay.classList.add('active-breathe');
-
-                                // Phase 9: Stage B Reveal (Connection)
-                                // Wait for Stage A to finish reading (18s hold)
-                                setTimeout(() => {
-                                    act2.classList.add('stage-b-active');
-                                }, 18000);
-                            }, 12000);
-
+                            // Initialize threshold interaction
+                            initThresholdInteraction();
                         }, 1800);
                     };
                 }).catch(e => console.warn('Invitation video play failed:', e));
             }
         }, 14500);
+    };
+
+    /**
+     * ACT 2 INTERACTION — Click Anywhere to Proceed
+     * Any click/tap inside ACT 2 triggers the transition.
+     * Pointer is visual guidance only, not the only hotspot.
+     */
+    const initThresholdInteraction = () => {
+        const threshold = document.getElementById('act2-threshold');
+        if (!act2) return;
+
+        let hasClicked = false;
+
+        const handleClick = (e) => {
+            if (hasClicked) return;
+            hasClicked = true;
+
+            // Hide pointer and text
+            if (threshold) threshold.classList.add('interacted');
+            act2.classList.add('threshold-interacted');
+
+            // Prep class for future effects (sparks, door response)
+            act2.classList.add('threshold-clicked');
+
+            // Haptic feedback (mobile)
+            if ('vibrate' in navigator) {
+                navigator.vibrate(15);
+            }
+
+            // Visual completion
+            if (threshold) threshold.classList.add('complete');
+
+            // Irreversible transition
+            setTimeout(() => {
+                act2.classList.add('threshold-crossed');
+
+                // POV Entry begins
+                act2.classList.add('pov-entry');
+
+                // Haptic pulse during POV (mobile)
+                if ('vibrate' in navigator) {
+                    setTimeout(() => navigator.vibrate([10, 200, 10]), 2000);
+                }
+
+                // Resolution -> Redirect to Arrival Page
+                setTimeout(() => {
+                    // Start fade out of current page
+                    document.body.style.transition = 'opacity 1.5s ease-in';
+                    document.body.style.opacity = '0';
+
+                    // Redirect after fade
+                    setTimeout(() => {
+                        window.location.href = 'arrival.html';
+                    }, 1500);
+                }, 4000); // 4s of POV travel before arrival
+
+            }, 600);
+
+            // Remove listener
+            act2.removeEventListener('click', handleClick);
+        };
+
+        // Click anywhere in ACT 2 to proceed
+        act2.addEventListener('click', handleClick);
     };
 
     /**

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I-Catching | Arrival</title>
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="arrival.css">
+
+    <!-- Meta/SEO -->
+    <meta name="description" content="I-Catching werkt al. Met aandacht. Met afstemming.">
+    <meta name="robots" content="noindex, nofollow"> <!-- Prevents indexing of this specific landing page if needed -->
+</head>
+
+<body>
+
+    <main class="page-wrapper">
+        <div class="viewport-frame"></div>
+        <div class="grain-overlay"></div>
+
+        <!-- Ambient Background Logo -->
+        <div id="ambient-layer"
+            style="position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;">
+            <img src="assets/iris.png" id="ambient-logo" alt=""
+                style="position: absolute; opacity: 0; will-change: transform;">
+        </div>
+
+        <script>
+            (function () {
+                const logo = document.getElementById('ambient-logo');
+                const container = document.querySelector('.page-wrapper'); // Use wrapper for bounds
+
+                // Config
+                // Size relative to container width
+                const size = Math.min(container.clientWidth * 0.5, 300);
+                logo.style.width = size + 'px';
+                logo.style.height = 'auto';
+
+                // Physics State
+                let x = container.clientWidth / 2 - size / 2;
+                let y = container.clientHeight / 2 - size / 2;
+
+                // Random slow velocity
+                let vx = (Math.random() - 0.5) * 0.3;
+                let vy = (Math.random() - 0.5) * 0.3;
+
+                let rot = 0;
+                let vRot = (Math.random() - 0.5) * 0.04;
+
+                function animate() {
+                    const maxX = container.clientWidth - logo.offsetWidth;
+                    const maxY = container.clientHeight - logo.offsetHeight;
+
+                    if (x <= 0 || x >= maxX) vx *= -1;
+                    if (y <= 0 || y >= maxY) vy *= -1;
+
+                    x += vx;
+                    y += vy;
+                    rot += vRot;
+
+                    x = Math.max(0, Math.min(x, maxX));
+                    y = Math.max(0, Math.min(y, maxY));
+
+                    logo.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rot}deg)`;
+
+                    requestAnimationFrame(animate);
+                }
+
+                setTimeout(() => {
+                    logo.style.transition = 'opacity 3s ease-in';
+                    logo.style.opacity = '0.12'; // 12% opacity
+                    animate();
+                }, 500);
+            })();
+        </script>
+
+        <div class="container" style="position: relative; z-index: 10;">
+
+            <!-- Core Text -->
+            <div class="core-text">
+                <p>I-Catching is er voor je.<br>Met aandacht.<br>Met afstemming.</p>
+            </div>
+
+            <!-- Explanation -->
+            <div class="explanation">
+                <p>Wij zijn jouw partner in het creëren van adembenemende latex kleding en verleidelijke erotische
+                    interieurstukken.</p>
+                <p>Elke wens begint bij een mens.</p>
+            </div>
+
+            <!-- Slogan (Replaces Anchor) -->
+            <p class="anchor">Bij I-Catching geloven we in een persoonlijke benadering om samen met jou tot een uniek
+                ontwerp te komen waar we allemaal blij van worden!</p>
+
+            <!-- Contact Emphasized -->
+            <div class="contact-frame">
+                <p class="contact-name">Iris van Laar</p>
+
+                <div class="contact-line">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                    <a href="mailto:info@i-catching.nl">info@i-catching.nl</a>
+                </div>
+
+                <div class="contact-line">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                    <a href="tel:+31628318928">06 28 31 89 28</a>
+                </div>
+            </div>
+
+            <!-- Website Status -->
+            <p class="status">De website is in ontwikkeling.<br>Binnenkort komt hier alles samen.</p>
+
+            <div class="scroll-presence"></div>
+        </div>
+    </main>
+
+</body>
+
+</html>

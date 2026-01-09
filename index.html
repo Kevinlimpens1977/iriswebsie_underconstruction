@@ -47,6 +47,9 @@
             <!-- Portal presence — psychological focal point -->
             <div class="hero__portal-presence" aria-hidden="true"></div>
 
+            <!-- Act 1 CTA (Dynamic) — ABOVE CONTENT -->
+            <div id="act1-cta" class="act1-cta" aria-live="polite"></div>
+
             <main class="hero__content">
                 <h1 class="hero__headline">De Deur Wacht</h1>
                 <p class="hero__subline">Niet alles openbaart zich meteen.</p>
@@ -56,9 +59,6 @@
                         class="char">o</span><span class="char">r</span><span class="char">t</span><span
                         class="char">.</span><span class="char">.</span><span class="char">.</span></p>
             </main>
-
-            <!-- Act 1 CTA (Dynamic) -->
-            <div id="act1-cta" class="act1-cta" aria-live="polite"></div>
         </section>
 
         <!-- Smoke Obscure Layer (Perceptual Text Disappearance) -->
@@ -82,47 +82,58 @@
             <!-- Layer 2: The Closed Door (Initial State) -->
             <div class="act2__closed"></div>
 
+            <!-- Layer 2.5: Threshold Zone (Visual guidance) -->
+            <div id="act2-threshold" class="act2__threshold" aria-label="Klik om binnen te gaan">
+                <!-- Ghostly Visor Pointer -->
+                <div class="threshold__pointer"></div>
+                <!-- Energy Release (diffuse light masses from door) -->
+                <div class="energy-release" aria-hidden="true">
+                    <div class="energy-mass"></div>
+                    <div class="energy-mass"></div>
+                    <div class="energy-mass"></div>
+                    <div class="energy-mass"></div>
+                    <div class="energy-mass"></div>
+                </div>
+            </div>
+
+            <!-- Invitation Text (Framing, not UI) -->
+            <p id="act2-invitation-text" class="act2__invitation-text">Alvast een kijkje nemen achter de deur?</p>
+
             <!-- Layer 3: Narrative Transitions (POV Light & Final State) -->
             <div class="act2__fill-light"></div>
             <div class="act2__charcoal-overlay">
-                <div class="final-content">
-                    <!-- Stage A: Meaning (Poetic) -->
-                    <div class="final-stage-a">
-                        <div class="glass-card">
-                            <!-- Line 1: Large, calm -->
-                            <h2 class="final-line-1">De deur is open.</h2>
+                <!-- ACT FINAL: Arrival -->
+                <div class="act-final">
+                    <div class="act-final__container">
 
-                            <!-- Line 2: Softer, smaller -->
-                            <p class="final-line-2">Wat daarachter ontstaat,<br>maken we samen.</p>
+                        <!-- Heading -->
+                        <h1 class="act-final__heading">Je bent hier.</h1>
 
-                            <!-- Line 3: Descriptive, sensual -->
-                            <div class="final-line-3">
-                                <p>Unieke latex kleding.</p>
-                                <p>Erotisch interieurdesign.</p>
-                                <p>Alles op maat. Alles in overleg.</p>
-                            </div>
+                        <!-- Core Text -->
+                        <div class="act-final__core">
+                            <p>I-Catching is er voor je.<br>Met aandacht.<br>Met afstemming.</p>
                         </div>
-                    </div>
 
-                    <!-- Stage B: Connection (Contact & Logo) -->
-                    <div class="final-stage-b">
-                        <div class="glass-card">
-                            <!-- Logo: Moved to Stage B -->
-                            <img src="assets/iris.png" alt="Iris Logo" class="final-logo">
-
-                            <!-- Contact: Whispered -->
-                            <div class="final-contact">
-                                <p class="contact-name">Iris van Laar</p>
-                                <p class="contact-detail">06 28 31 89 28</p>
-                                <p class="contact-detail">info@i-catching.nl</p>
-                            </div>
-
-                            <!-- Footer: Subtle -->
-                            <p class="final-footer">
-                                De website wordt gebouwd.<br>
-                                De mogelijkheden zijn er al.
-                            </p>
+                        <!-- Explanation -->
+                        <div class="act-final__explanation">
+                            <p>Wij zijn jouw partner in het creëren van adembenemende latex kleding en verleidelijke
+                                erotische interieurstukken.</p>
+                            <p>Elke wens begint bij een mens.</p>
                         </div>
+
+                        <!-- Anchoring Sentence -->
+                        <p class="act-final__anchor">Liefde en aandacht voor wensen en mensen.</p>
+
+                        <!-- Contact -->
+                        <div class="act-final__contact">
+                            <p><a href="mailto:info@i-catching.nl">E-mail: info@i-catching.nl</a></p>
+                            <p><a href="tel:+31628318928">Telefoon: 06 28 31 89 28</a></p>
+                        </div>
+
+                        <!-- Website Status -->
+                        <p class="act-final__status">De website is in ontwikkeling.<br>Binnenkort komt hier alles samen.
+                        </p>
+
                     </div>
                 </div>
             </div>
